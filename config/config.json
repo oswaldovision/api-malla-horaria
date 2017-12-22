@@ -1,0 +1,38 @@
+{
+  "production": {
+    "PORT": 3046,
+    "LDAP_url": "LDAP://siju.local",
+    "LDAP_baseDN": "OU=OU_Organization,DC=siju,DC=local",
+    "LDAP_username": "App_mallah",
+    "LDAP_password": "xt+wYA?V4$fw",
+    "DB_CONFIG_user": "admin-test",
+    "DB_CONFIG_password": "Dilis1088*",
+    "DB_CONFIG_server": "server-dbvision-test.database.windows.net",
+    "DB_CONFIG_database": "testSqlDb",
+    "DB_CONFIG_options_encrypt": true
+  },
+  "staging": {
+    "PORT": 3045,
+    "LDAP_url": "LDAP://siju.local",
+    "LDAP_baseDN": "OU=OU_Organization,DC=siju,DC=local",
+    "LDAP_username": "App_mallah",
+    "LDAP_password": "xt+wYA?V4$fw",
+    "DB_CONFIG_user": "admin-test",
+    "DB_CONFIG_password": "Dilis1088*",
+    "DB_CONFIG_server": "server-dbvision-test.database.windows.net",
+    "DB_CONFIG_database": "testSqlDb",
+    "DB_CONFIG_options_encrypt": true
+  },
+  "development": {
+    "PORT": 8080,
+    "LDAP_url": "LDAP://KELLER.visionsoftware.loc/Default",
+    "LDAP_baseDN": "dc=visionsoftware,dc=loc",
+    "LDAP_username": "oswaldom@visionsoftware.com.co",
+    "LDAP_password": "Garantia3030!",
+    "DB_CONFIG_user": "admin-test",
+    "DB_CONFIG_password": "Dilis1088*",
+    "DB_CONFIG_server": "server-dbvision-test.database.windows.net",
+    "DB_CONFIG_database": "testSqlDb",
+    "DB_CONFIG_options_encrypt": true
+  }
+}
