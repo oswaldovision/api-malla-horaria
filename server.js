@@ -2,13 +2,20 @@ require('./config/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+const port = process.env.PORT
 const app = express()
 app.use(bodyParser.json())
-const port = process.env.PORT
+app.set('view engine', 'pug')
+
 
 const testRoute = require('./routes/test')
 const securityRoute = require('./routes/security')
 const ad = require('./routes/activeDirectory')
+
+
+app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
 
 app.use('/test', testRoute)
 app.use('/security', securityRoute)
