@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const activeDirectory = require('activeDirectory')
+const activeDirectory = require('activedirectory')
 
 const config = {
   url: process.env.LDAP_url,

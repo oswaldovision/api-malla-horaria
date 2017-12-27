@@ -10,7 +10,7 @@ app.set('view engine', 'pug')
 
 const testRoute = require('./routes/test')
 const securityRoute = require('./routes/security')
-const ad = require('./routes/activeDirectory')
+const ad = require('./routes/ad')
 
 
 app.get('/', function (req, res) {
