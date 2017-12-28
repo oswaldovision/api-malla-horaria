@@ -1,11 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-require('./config/config')
 const port = process.env.PORT || 3000
 const app = express()
 app.use(bodyParser.json())
 app.set('view engine', 'pug')
+
+require('./config/config')
 
 const testRoute = require('./routes/test')
 const securityRoute = require('./routes/security')
