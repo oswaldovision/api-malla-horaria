@@ -1,17 +1,15 @@
-require('./config/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const port = process.env.PORT
+require('./config/config')
+const port = process.env.PORT || 3000
 const app = express()
 app.use(bodyParser.json())
 app.set('view engine', 'pug')
 
-
 const testRoute = require('./routes/test')
 const securityRoute = require('./routes/security')
 const ad = require('./routes/ad')
-
 
 app.get('/', function (req, res) {
   res.render('index', { title: 'Hey', message: 'Hello there!' })

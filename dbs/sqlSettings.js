@@ -1,13 +1,12 @@
 const sql = require('mssql')
 
-// Create connection to database
 const config = {
-  user: 'admin-test',
-  password: 'Dilis1088*',
-  server: 'server-dbvision-test.database.windows.net',
-  database: 'testSqlDb',
+  user: process.env.DB_CONFIG_user,
+  password: process.env.DB_CONFIG_password,
+  server: process.env.DB_CONFIG_server,
+  database: process.env.DB_CONFIG_database,
   options: {
-    encrypt: true
+    encrypt: process.env.DB_CONFIG_options_encrypt
   }
 }
 
