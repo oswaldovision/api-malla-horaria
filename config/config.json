@@ -22,7 +22,7 @@
     "DB_CONFIG_server": "mng-mallahoraria.database.windows.net",
     "DB_CONFIG_database": "MNG-DW",
     "DB_CONFIG_options_encrypt": true,
-    "whitelist" : "https://mng-visor.azurewebsites.net"
+    "whitelist" : "mng-visor.azurewebsites.net"
   },
   "development": {
     "PORT": 8080,
