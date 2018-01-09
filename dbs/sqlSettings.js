@@ -6,7 +6,7 @@ const config = {
   server: process.env.DB_CONFIG_server,
   database: process.env.DB_CONFIG_database,
   options: {
-    encrypt: process.env.DB_CONFIG_options_encrypt
+    encrypt: true
   }
 }
 
