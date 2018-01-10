@@ -1,31 +1,37 @@
 var module = angular.module('app')
 
-var controller = function ($http, NgTableParams, AsignementService) {
-  var self = this
-  self.asignements = []
+var controller = function ($scope,$http, NgTableParams, AsignementService, Session) {
+  var self = this;
+  $scope.asignements = [];
+  $scope.authenticated = false;
 
   self.$onInit = function () {
     AsignementService.getAsignements($http).then(function (allAsignements) {
-      self.asignements = allAsignements.recordset
+      $scope.asignements = allAsignements.recordset
     })
   }
 
-  self.switchStore = function (store) {
+  $scope.$watch(function () {
+    return Session.user;
+  }, function () {
+    $scope.currentUser = Session.user;
+    $scope.authenticated = $scope.currentUser.isAuthenticated;
+  }, true)
+
+  $scope.switchStore = function (store) {
     if (store == 'todas'){
-      self.tableParams = new NgTableParams({}, {dataset: self.asignements});
+      $scope.tableParams = new NgTableParams({}, {dataset: $scope.asignements});
     }else {
-      self.tableParams = new NgTableParams({}, {
-        dataset: self.asignements.filter(function (item) {
+      $scope.tableParams = new NgTableParams({}, {
+        dataset: $scope.asignements.filter(function (item) {
           return item.Store == store;
         })
       })
     }
   }
-
 }
 
 module.component('tableAsigments', {
   templateUrl: '../templates/tableAsigments.html',
-  controllerAs: 'self',
-  controller: ['$http', 'NgTableParams', 'AsignementService', controller]
+  controller: ['$scope','$http', 'NgTableParams', 'AsignementService','Session', controller]
 })

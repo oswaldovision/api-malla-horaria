@@ -1,29 +1,38 @@
-<div class="row">
-    <div class="btn-group btn-group-lg" role="group" aria-label="...">
-        <button type="button" ng-click="self.switchStore('todas')" class="btn btn-info">Todas</button>
-        <button type="button" ng-click="self.switchStore('Chapinero')" class="btn btn-info">Chapinero</button>
-        <button type="button" ng-click="self.switchStore('Colina')" class="btn btn-info">Colina</button>
-        <button type="button" ng-click="self.switchStore('Multiplaza')" class="btn btn-info">Multiplaza</button>
+<div ng-switch="authenticated">
+    <div ng-switch-when="true">
+        <div class="row">
+            <div class="btn-group btn-group-lg" role="group" aria-label="...">
+                <button type="button" ng-click="switchStore('todas')" class="btn btn-info">Todas</button>
+                <button type="button" ng-click="switchStore('Chapinero')" class="btn btn-info">Chapinero</button>
+                <button type="button" ng-click="switchStore('Colina')" class="btn btn-info">Colina</button>
+                <button type="button" ng-click="switchStore('Multiplaza')" class="btn btn-info">Multiplaza</button>
+            </div>
+        </div>
+        <div class="row">
+            <table ng-table="tableParams" class="table" show-filter="true">
+                <tr ng-repeat="row in $data">
+                    <td title="'Fecha'" filter="{ DateShift: 'number'}" sortable="'DateShift'">
+                        {{row.DateShift | date : format : shortDate}}
+                    </td>
+                    <td title="'Vendedor'" filter="{ SellerName: 'text'}" sortable="'SellerName'">
+                        {{row.SellerName}}
+                    </td>
+                    <td title="'Turno'" filter="{ WorkTime: 'text'}" sortable="'WorkTime'">
+                        {{row.WorkTime}}
+                    </td>
+                    <td title="'Estado'" filter="{ State: 'text'}" sortable="'State'">
+                        {{row.State}}
+                    </td>
+                    <td title="'Tienda'" filter="{ Store: 'text'}" sortable="'Store'">
+                        {{row.Store}}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
-<div class="row">
-    <table ng-table="self.tableParams" class="table" show-filter="true">
-        <tr ng-repeat="row in $data">
-            <td title="'Fecha'" filter="{ DateShift: 'number'}" sortable="'DateShift'">
-                {{row.DateShift | date : format : shortDate}}
-            </td>
-            <td title="'Vendedor'" filter="{ SellerName: 'text'}" sortable="'SellerName'">
-                {{row.SellerName}}
-            </td>
-            <td title="'Turno'" filter="{ WorkTime: 'text'}" sortable="'WorkTime'">
-                {{row.WorkTime}}
-            </td>
-            <td title="'Estado'" filter="{ State: 'text'}" sortable="'State'">
-                {{row.State}}
-            </td>
-            <td title="'Tienda'" filter="{ Store: 'text'}" sortable="'Store'">
-                {{row.Store}}
-            </td>
-        </tr>
-    </table>
+    <div ng-switch-when="false">
+        <div class="alert alert-info" style="text-align: center">
+            <span>Acceda haciendo login</span>
+        </div>
+    </div>
 </div>
