@@ -1,0 +1,31 @@
+<div ng-switch="formLogin">
+    <div ng-switch-when="true">
+        <form name="loginForm" ng-submit="authenticate(credentials)" class="form-inline">
+            <div class="form-group">
+                <input class="form-control form-control-lg" type="email" id="username" ng-model="credentials.email" placeholder="email" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="password" id="password" ng-model="credentials.password" placeholder="password"  required>
+            </div>
+            <button type="submit" class="btn btn-info navbar-btn">Login</button>
+        </form>
+    </div>
+    <div ng-switch-when="false">
+        <ul class="list-unstyled components">
+            <li>
+                <a ui-sref-active="active">
+                    <i class="glyphicon glyphicon-user"></i>
+                    {{ current.profile.cn }}
+                </a>
+            </li>
+            <li>
+                <a>
+                    <i ng-click="logout()" class="glyphicon glyphicon-log-out"></i>
+                    logout
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div ng-switch-default=""></div>
+</div>
+

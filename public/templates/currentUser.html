@@ -1,0 +1,14 @@
+<ul class="nav navbar-nav navbar-right" ng-if="isAuthenticate()">
+    <li>
+        <a href="#">
+            <i class="glyphicon glyphicon-user"></i>
+            User name : {{currentUser}}
+        </a>
+    </li>
+    <li>
+        <a href="#" ng-click="logOut()">
+            <i class="glyphicon glyphicon-log-out"></i>
+            Logout
+        </a>
+    </li>
+</ul>

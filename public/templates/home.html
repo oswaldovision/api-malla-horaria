@@ -1,0 +1,12 @@
+<div ng-switch="authenticated">
+    <div ng-switch-when="true">
+        <div class="alert alert-success" style="text-align: center">
+            <span>Bienvenido  {{ currentUser.profile.cn }} !</span>
+        </div>
+    </div>
+    <div ng-switch-when="false">
+        <div class="alert alert-info" style="text-align: center">
+            <span>Acceda haciendo login</span>
+        </div>
+    </div>
+</div>
