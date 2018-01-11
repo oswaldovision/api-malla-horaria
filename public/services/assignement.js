@@ -6,7 +6,7 @@ function service ($http, cons) {
   this.getAsignements = function () {
     var req = {
       method: 'GET',
-      url: '/test'
+      url: '/workshift'
     }
     return $http(req).then(function (data) {
       return data.data
@@ -18,7 +18,7 @@ function service ($http, cons) {
   this.getAsignementsRange = function (start, end) {
     var req = {
       method: 'GET',
-      url: '/test/range?start=' + start + '&end=' + end
+      url: '/workshift/range?start=' + start + '&end=' + end
     }
     return $http(req).then(function (data) {
       return data.data

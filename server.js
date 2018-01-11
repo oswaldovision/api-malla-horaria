@@ -1,4 +1,3 @@
-const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
@@ -12,7 +11,7 @@ app.use(function (req, res, next) {
 
 require('./config/config')
 
-const testRoute = require('./routes/test')
+const WorkShift = require('./routes/WorkShift')
 const securityRoute = require('./routes/security')
 const ad = require('./routes/ad')
 
@@ -21,7 +20,7 @@ const ad = require('./routes/ad')
 // })
 app.use(express.static(__dirname + '/public'));
 
-app.use('/test', testRoute)
+app.use('/WorkShift', WorkShift)
 app.use('/security', securityRoute)
 app.use('/ad', ad)
 

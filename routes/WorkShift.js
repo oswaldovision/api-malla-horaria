@@ -56,4 +56,15 @@ router.get('/range', (req, res) => {
 
 })
 
+router.get('/sellers',(req,res) => {
+  let script = `SELECT distinct SellerName FROM [dbo].[View_MNGResults]`
+
+  execScript(script, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+    res.send(data)
+  })
+})
+
 module.exports = router
