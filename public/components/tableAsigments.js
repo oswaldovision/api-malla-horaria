@@ -4,6 +4,8 @@ var controller = function ($scope,$http, NgTableParams, AsignementService, Sessi
   var self = this;
   $scope.asignements = [];
   $scope.authenticated = false;
+  $scope.start = new Date();
+  $scope.end = new Date();
 
   self.$onInit = function () {
     $scope.loadAsignements();
@@ -39,14 +41,11 @@ var controller = function ($scope,$http, NgTableParams, AsignementService, Sessi
   }
 
   $scope.loadAsignements = function () {
+    $scope.start = new Date();
+    $scope.end = new Date();
     AsignementService.getAsignements($http).then(function (allAsignements) {
       $scope.asignements = allAsignements.recordset;
       $scope.tableParams = new NgTableParams({}, {dataset: []});
-      var today = new Date();
-      var dd = formatLessNine(today.getDate());
-      var mm = formatLessNine(today.getMonth()+1); //January is 0!
-      var yyyy = today.getFullYear();
-      $('input[type="date"]').val(mm + '-' + dd + '-' + yyyy);
     })
   }
 
