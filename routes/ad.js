@@ -12,6 +12,7 @@ const config = {
 const ad = new activeDirectory(config)
 
 router.post('/login', (req, res) => {
+  console.log(config.url)
   let body = {'email': req.body.email, 'password': req.body.password}
   ad.authenticate(body.email, body.password, function (err, auth) {
     if (err || !auth) {

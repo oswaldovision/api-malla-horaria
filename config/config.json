@@ -29,7 +29,7 @@
     "LDAP_url": "LDAP://KELLER.visionsoftware.loc/Default",
     "LDAP_baseDN": "dc=visionsoftware,dc=loc",
     "LDAP_username": "oswaldom@visionsoftware.com.co",
-    "LDAP_password": "Garantia3030!",
+    "LDAP_password": "Garantia4040!",
     "DB_CONFIG_user": "admin-test",
     "DB_CONFIG_password": "Dilis1088*",
     "DB_CONFIG_server": "server-dbvision-test.database.windows.net",

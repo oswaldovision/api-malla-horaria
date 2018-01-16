@@ -14,22 +14,18 @@ var controller = function ($scope, AuthService, Session, $location) {
   }, true)
 
   $scope.authenticate = function (credentials) {
-    AuthService.loginMock(credentials);
-    $scope.formLogin = false;
-    $location.path('/');
-    //TODO: descomentar cuando se tenga el login (VPN)
-    // AuthService.login(credentials).then(function (user) {
-    //   if (user){
-    //     $scope.formLogin = false;
-    //     AuthService.getRolesUser(user.mail)
-    //     $location.path('/');
-    //   }
-    // }, function (err) {
-    //   // $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-    //   console.log('fail login ' + err)
-    // }).catch(function (er) {
-    //   console.log('usuario erro' + er)
-    // })
+    AuthService.login(credentials).then(function (user) {
+      if (user){
+        $scope.formLogin = false;
+        // AuthService.getRolesUser(user.mail)
+        $location.path('/');
+      }
+    }, function (err) {
+      // $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      console.log('fail login ' + err)
+    }).catch(function (er) {
+      console.log('usuario erro' + er)
+    })
   }
 
   $scope.logout = function () {
