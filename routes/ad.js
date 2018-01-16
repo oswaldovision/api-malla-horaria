@@ -16,7 +16,7 @@ router.post('/login', (req, res) => {
   let body = {'email': req.body.email, 'password': req.body.password}
   ad.authenticate(body.email, body.password, function (err, auth) {
     if (err || !auth) {
-      res.status(401).send({message: `User not authorized: ${err}`})
+      res.status(401).send({message: `User not authorized: ${config} con el usuario ${body}`})
       return
     }
 
