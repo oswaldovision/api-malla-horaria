@@ -1,13 +1,20 @@
 <div ng-switch="formLogin">
     <div ng-switch-when="true">
         <form name="loginForm" ng-submit="authenticate(credentials)" class="form-inline">
-            <div class="form-group">
-                <input class="form-control form-control-lg" type="email" id="username" ng-model="credentials.email" placeholder="email" required>
+            <div ng-if="!showError">
+                <div class="form-group">
+                    <input class="form-control form-control-lg" type="email" id="username"
+                           ng-model="credentials.email" placeholder="email" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-sm" type="password" id="password"
+                           ng-model="credentials.password" placeholder="password" required>
+                </div>
+                <button type="submit" class="btn btn-info navbar-btn">Login</button>
             </div>
-            <div class="form-group">
-                <input class="form-control form-control-sm" type="password" id="password" ng-model="credentials.password" placeholder="password"  required>
+            <div class="alert alert-danger" ng-if="showError" ng-class="{fade:doFade}">
+                <span class="text-center">{{message}}</span>
             </div>
-            <button type="submit" class="btn btn-info navbar-btn">Login</button>
         </form>
     </div>
     <div ng-switch-when="false">
@@ -26,6 +33,8 @@
             </li>
         </ul>
     </div>
-    <div ng-switch-default=""></div>
+    <div ng-switch-default="">
+
+    </div>
 </div>
 

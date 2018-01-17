@@ -14,7 +14,8 @@ module.factory('AuthService', function ($http, Session) {
       Session.create(res.data)
       return res.data
     }).catch(function (err) {
-      console.log('Ha fallado el login'+ err.message)
+      console.log(err.data.message);
+      return err;
     })
   }
 

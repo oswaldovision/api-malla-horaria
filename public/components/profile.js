@@ -1,6 +1,10 @@
 var module = angular.module('app')
 
-var controller = function ($scope, AuthService, Session, $location) {
+var controller = function ($scope, AuthService, Session, $location,$timeout) {
+  $scope.message = "";
+  $scope.showError = false;
+  $scope.doFade = false;
+
   $scope.formLogin = true;
   $scope.credentials = {
     email : '',
@@ -14,15 +18,24 @@ var controller = function ($scope, AuthService, Session, $location) {
   }, true)
 
   $scope.authenticate = function (credentials) {
-    AuthService.login(credentials).then(function (user) {
-      if (user){
+    AuthService.login(credentials).then(function (data) {
+      if (data.status == 401){
+        $scope.formLogin = true;
+        $scope.showError = false;
+        $scope.doFade = false;
+
+        $scope.showError = true;
+        $scope.message = 'usuario o password invalido';
+
+        $timeout(function () {
+          $scope.doFade = true;
+          $scope.showError = false;
+        }, 1000);
+      }else{
         $scope.formLogin = false;
         // AuthService.getRolesUser(user.mail)
         $location.path('/');
       }
-    }, function (err) {
-      // $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-      console.log('fail login ' + err)
     }).catch(function (er) {
       console.log('usuario erro' + er)
     })
@@ -39,5 +52,5 @@ var controller = function ($scope, AuthService, Session, $location) {
 
 module.component('profile', {
   templateUrl: '../templates/profile.html',
-  controller: ['$scope', 'AuthService', 'Session', '$location', controller]
+  controller: ['$scope', 'AuthService', 'Session', '$location', '$timeout',controller]
 })
