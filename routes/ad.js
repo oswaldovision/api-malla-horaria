@@ -12,11 +12,12 @@ const config = {
 const ad = new activeDirectory(config)
 
 router.post('/login', (req, res) => {
-  console.log(config.url)
+  console.log(`url de configuracion: ${config.url}`)
   let body = {'email': req.body.email, 'password': req.body.password}
+  console.log(`usuario de logueo: ${body.email}`)
   ad.authenticate(body.email, body.password, function (err, auth) {
     if (err || !auth) {
-      res.status(401).send({message: `User not authorized: ${config} con el usuario ${body}`})
+      res.status(401).send({message: `Loguin fallido`})
       return
     }
 

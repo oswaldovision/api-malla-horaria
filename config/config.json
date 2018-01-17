@@ -13,9 +13,9 @@
   },
   "staging": {
     "PORT": 3045,
-    "LDAP_url": "LDAP://siju.local",
+    "LDAP_url": "LDAP://serdczoo1.siju.local",
     "LDAP_baseDN": "OU=OU_Organization,DC=siju,DC=local",
-    "LDAP_username": "App_mallah",
+    "LDAP_username": "App_mallah@siju.local",
     "LDAP_password": "xt+wYA?V4$fw",
     "DB_CONFIG_user": "oswaldom",
     "DB_CONFIG_password": "Vision2017",
