@@ -24,13 +24,26 @@ app.config(function ($stateProvider) {
     component: 'roles'
   }
 
+  var scheduleState = {
+    name: 'schedule',
+    url: '/schedule',
+    component : 'schedule'
+  }
+
   $stateProvider.state(homeState);
   $stateProvider.state(asignementState);
   $stateProvider.state(chartState);
   $stateProvider.state(rolesState);
+  $stateProvider.state(scheduleState);
   $stateProvider.state("default", {
     name: 'home',
     url: '',
     component : 'home'
   })
 });
+
+app.config(['calendarConfig', function(calendarConfig) {
+
+  calendarConfig.dateFormatter = 'moment'; // use moment to format dates
+
+}]);

@@ -1,1 +1,1 @@
-var myApp = angular.module('app', ['ui.router', 'satellizer', 'ngTable', 'chart.js', 'angucomplete-alt'])
+var myApp = angular.module('app', ['ui.router', 'satellizer', 'ngTable', 'chart.js', 'angucomplete-alt','mwl.calendar','ui.bootstrap','angularMoment','ngAnimate'])
