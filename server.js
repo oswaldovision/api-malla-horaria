@@ -11,9 +11,10 @@ app.use(function (req, res, next) {
 
 require('./config/config')
 
-const WorkShift = require('./routes/WorkShift')
+const WorkShift = require('./routes/workShift')
 const securityRoute = require('./routes/security')
 const ad = require('./routes/ad')
+const roles = require('./routes/roles')
 
 // app.get('/', function (req, res) {
 //   res.render('public/index.html')
@@ -23,6 +24,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/WorkShift', WorkShift)
 app.use('/security', securityRoute)
 app.use('/ad', ad)
+app.use('/roles', roles)
 
 
 

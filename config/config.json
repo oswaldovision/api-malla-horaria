@@ -30,9 +30,9 @@
     "LDAP_baseDN": "dc=visionsoftware,dc=loc",
     "LDAP_username": "oswaldom@visionsoftware.com.co",
     "LDAP_password": "Garantia4040!",
-    "DB_CONFIG_user": "admin-test",
-    "DB_CONFIG_password": "Dilis1088*",
-    "DB_CONFIG_server": "server-dbvision-test.database.windows.net",
+    "DB_CONFIG_user": "oswaldom",
+    "DB_CONFIG_password": "Vision2017",
+    "DB_CONFIG_server": "mng-mallahoraria.database.windows.net",
     "DB_CONFIG_database": "MNG-DW",
     "DB_CONFIG_options_encrypt": true,
     "whitelist" : "localhost:3000|http://127.0.0.1:8080|http://localhost:8080"
