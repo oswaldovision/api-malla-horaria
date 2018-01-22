@@ -14,6 +14,16 @@ var corsOptions = {
   }
 }
 
+router.get('/', cors(corsOptions), (req, res, next) => {
+
+  selectAll('mng.Rol', (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+    res.send(data)
+  })
+})
+
 router.post('/', (req, res, next) => {
   var params = [{
     paramName: 'Name',
