@@ -16,7 +16,7 @@ var corsOptions = {
 
 router.get('/', cors(corsOptions), (req, res, next) => {
 
-  selectAll('results.WorkShift', (err, data) => {
+  selectAll('mng.WorkShift', (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
