@@ -42,7 +42,7 @@ router.get('/fromSp', (req, res) => {
 })
 
 router.get('/range', (req, res) => {
-  let script = `SELECT * FROM [dbo].[View_MNGResults] 
+  let script = `SELECT * FROM [mng].[View_MNGResults] 
                 WHERE DateShift >= '${req.query.start}T00:00:00.000' AND 
                 DateShift <= '${req.query.end}T12:00:00.000'
                 ORDER by DateShift`
@@ -57,7 +57,7 @@ router.get('/range', (req, res) => {
 })
 
 router.get('/sellers',(req,res) => {
-  let script = `SELECT distinct SellerName FROM [dbo].[View_MNGResults]`
+  let script = `SELECT distinct SellerName FROM [mng].[View_MNGResults]`
 
   execScript(script, (err, data) => {
     if (err) {
