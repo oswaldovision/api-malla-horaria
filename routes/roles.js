@@ -1,21 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const cors = require('cors')
+const {checkAdmin} = require('./../middleware/authorize')
+const {checkCors} = require('./../middleware/whiteList')
 const {selectAll, execSp, execScript} = require('./../dbs/sql')
 
-var whitelist = process.env.whitelist.split('|')
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error(`${origin} Not allowed by CORS`))
-    }
-  }
-}
-
-router.get('/', cors(corsOptions), (req, res, next) => {
-
+router.get('/:user' , checkCors,checkAdmin,(req, res, next) => {
   selectAll('mng.Rol', (err, data) => {
     if (err) {
       res.status(500).send(err)

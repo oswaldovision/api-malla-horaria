@@ -11,7 +11,7 @@ const config = {
 
 const ad = new activeDirectory(config)
 
-router.post('/login', (req, res) => {
+router.post('/login',(req, res) => {
   console.log(`url de configuracion: ${config.url}`)
   let body = {'email': req.body.email, 'password': req.body.password}
   console.log(`usuario de logueo: ${body.email}`)
@@ -26,6 +26,7 @@ router.post('/login', (req, res) => {
         res.status(404).send({message: `error obtain user ${body.email}: ${err} `})
         return
       }
+      user.isAdmin = req.isAdmin
       res.status(200).send(user)
     })
 

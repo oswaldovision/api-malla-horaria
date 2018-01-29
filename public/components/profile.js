@@ -33,7 +33,7 @@ var controller = function ($scope, AuthService, Session, $location,$timeout) {
         }, 1000);
       }else{
         $scope.formLogin = false;
-        // AuthService.getRolesUser(user.mail)
+        // AuthService.getRolesUser(data.mail)
         $location.path('/');
       }
     }).catch(function (er) {
