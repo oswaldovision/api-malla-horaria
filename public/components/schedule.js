@@ -45,7 +45,7 @@ var controller = function ($scope,sellersService,moment,calendarConfig) {
     {
       title: 'Oswaldo Martinez',
       color: calendarConfig.colorTypes.success,
-      startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
+      startsAt: moment().toDate(),
       // endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
       draggable: true,
       resizable: true,
