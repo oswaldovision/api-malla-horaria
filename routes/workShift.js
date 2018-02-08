@@ -56,4 +56,15 @@ router.get('/sellers',(req,res) => {
   })
 })
 
+router.get('/sellersProjection',(req,res) =>{
+  let script = `SELECT SellerName,DateShift, Store  FROM [mng].[View_MNGResults]`
+
+  execScript(script, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+    res.send(data)
+  })
+})
+
 module.exports = router

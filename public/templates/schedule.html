@@ -1,18 +1,39 @@
-<div>
+<div class="container">
     <h2 class="text-center">{{ calendarTitle }}</h2>
-
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Tiendas</h4>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Seleccione tienda... <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="switchStore('Chapinero')">Chapinero</a></li>
+                    <li><a ng-click="switchStore('Colina')">Colina</a></li>
+                    <li><a ng-click="switchStore('Multiplaza')">Multiplaza</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ng-click="switchStore('Todas')">Todas</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Vendedores</h4>
+            <sellers></sellers>
+        </div>
+    </div>
+    <hr>
     <div class="row">
 
         <div class="col-md-6 text-center">
             <div class="btn-group">
-
                 <button
                         class="btn btn-primary"
                         mwl-date-modifier
                         date="viewDate"
                         decrement="calendarView"
                         ng-click="cellIsOpen = false">
-                    Previous
+                    Previo
                 </button>
                 <button
                         class="btn btn-default"
@@ -20,7 +41,7 @@
                         date="viewDate"
                         set-to-today
                         ng-click="cellIsOpen = false">
-                    Today
+                    Hoy
                 </button>
                 <button
                         class="btn btn-primary"
@@ -28,7 +49,7 @@
                         date="viewDate"
                         increment="calendarView"
                         ng-click="cellIsOpen = false">
-                    Next
+                    Siguiente
                 </button>
             </div>
         </div>
@@ -37,10 +58,10 @@
 
         <div class="col-md-6 text-center">
             <div class="btn-group">
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'year'" ng-click="cellIsOpen = false">Year</label>
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'" ng-click="cellIsOpen = false">Month</label>
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'" ng-click="cellIsOpen = false">Week</label>
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'day'" ng-click="cellIsOpen = false">Day</label>
+                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'"
+                       ng-click="cellIsOpen = false">Mes</label>
+                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'"
+                       ng-click="cellIsOpen = false">Semana</label>
             </div>
         </div>
 
@@ -67,105 +88,105 @@
     <br><br><br>
 
     <!--<h3 id="event-editor">-->
-        <!--Edit events-->
-        <!--<button-->
-                <!--class="btn btn-primary pull-right"-->
-                <!--ng-click="addEvent()">-->
-            <!--Add new-->
-        <!--</button>-->
-        <!--<div class="clearfix"></div>-->
+    <!--Edit events-->
+    <!--<button-->
+    <!--class="btn btn-primary pull-right"-->
+    <!--ng-click="addEvent()">-->
+    <!--Add new-->
+    <!--</button>-->
+    <!--<div class="clearfix"></div>-->
     <!--</h3>-->
 
     <!--<table class="table table-bordered">-->
 
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>Title</th>-->
-            <!--<th>Primary color</th>-->
-            <!--<th>Secondary color</th>-->
-            <!--<th>Starts at</th>-->
-            <!--<th>Ends at</th>-->
-            <!--<th>Remove</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th>Title</th>-->
+    <!--<th>Primary color</th>-->
+    <!--<th>Secondary color</th>-->
+    <!--<th>Starts at</th>-->
+    <!--<th>Ends at</th>-->
+    <!--<th>Remove</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
 
-        <!--<tbody>-->
-        <!--<tr ng-repeat="event in events track by $index">-->
-            <!--<td>-->
-                <!--<input-->
-                        <!--type="text"-->
-                        <!--class="form-control"-->
-                        <!--ng-model="event.title">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input class="form-control" colorpicker type="text" ng-model="event.color.primary">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input class="form-control" colorpicker type="text" ng-model="event.color.secondary">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<p class="input-group" style="max-width: 250px">-->
-                    <!--<input-->
-                            <!--type="text"-->
-                            <!--class="form-control"-->
-                            <!--readonly-->
-                            <!--uib-datepicker-popup="dd MMMM yyyy"-->
-                            <!--ng-model="event.startsAt"-->
-                            <!--is-open="event.startOpen"-->
-                            <!--close-text="Close" >-->
-                    <!--<span class="input-group-btn">-->
-              <!--<button-->
-                      <!--type="button"-->
-                      <!--class="btn btn-default"-->
-                      <!--ng-click="toggle($event, 'startOpen', event)">-->
-                <!--<i class="glyphicon glyphicon-calendar"></i>-->
-              <!--</button>-->
-            <!--</span>-->
-                <!--</p>-->
-                <!--<div-->
-                        <!--uib-timepicker-->
-                        <!--ng-model="event.startsAt"-->
-                        <!--hour-step="1"-->
-                        <!--minute-step="15"-->
-                        <!--show-meridian="true">-->
-                <!--</div>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<p class="input-group" style="max-width: 250px">-->
-                    <!--<input-->
-                            <!--type="text"-->
-                            <!--class="form-control"-->
-                            <!--readonly-->
-                            <!--uib-datepicker-popup="dd MMMM yyyy"-->
-                            <!--ng-model="event.endsAt"-->
-                            <!--is-open="event.endOpen"-->
-                            <!--close-text="Close">-->
-                    <!--<span class="input-group-btn">-->
-              <!--<button-->
-                      <!--type="button"-->
-                      <!--class="btn btn-default"-->
-                      <!--ng-click="toggle($event, 'endOpen', event)">-->
-                <!--<i class="glyphicon glyphicon-calendar"></i>-->
-              <!--</button>-->
-            <!--</span>-->
-                <!--</p>-->
-                <!--<div-->
-                        <!--uib-timepicker-->
-                        <!--ng-model="event.endsAt"-->
-                        <!--hour-step="1"-->
-                        <!--minute-step="15"-->
-                        <!--show-meridian="true">-->
-                <!--</div>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<button-->
-                        <!--class="btn btn-danger"-->
-                        <!--ng-click="events.splice($index, 1)">-->
-                    <!--Delete-->
-                <!--</button>-->
-            <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
+    <!--<tbody>-->
+    <!--<tr ng-repeat="event in events track by $index">-->
+    <!--<td>-->
+    <!--<input-->
+    <!--type="text"-->
+    <!--class="form-control"-->
+    <!--ng-model="event.title">-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<input class="form-control" colorpicker type="text" ng-model="event.color.primary">-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<input class="form-control" colorpicker type="text" ng-model="event.color.secondary">-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<p class="input-group" style="max-width: 250px">-->
+    <!--<input-->
+    <!--type="text"-->
+    <!--class="form-control"-->
+    <!--readonly-->
+    <!--uib-datepicker-popup="dd MMMM yyyy"-->
+    <!--ng-model="event.startsAt"-->
+    <!--is-open="event.startOpen"-->
+    <!--close-text="Close" >-->
+    <!--<span class="input-group-btn">-->
+    <!--<button-->
+    <!--type="button"-->
+    <!--class="btn btn-default"-->
+    <!--ng-click="toggle($event, 'startOpen', event)">-->
+    <!--<i class="glyphicon glyphicon-calendar"></i>-->
+    <!--</button>-->
+    <!--</span>-->
+    <!--</p>-->
+    <!--<div-->
+    <!--uib-timepicker-->
+    <!--ng-model="event.startsAt"-->
+    <!--hour-step="1"-->
+    <!--minute-step="15"-->
+    <!--show-meridian="true">-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<p class="input-group" style="max-width: 250px">-->
+    <!--<input-->
+    <!--type="text"-->
+    <!--class="form-control"-->
+    <!--readonly-->
+    <!--uib-datepicker-popup="dd MMMM yyyy"-->
+    <!--ng-model="event.endsAt"-->
+    <!--is-open="event.endOpen"-->
+    <!--close-text="Close">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button-->
+    <!--type="button"-->
+    <!--class="btn btn-default"-->
+    <!--ng-click="toggle($event, 'endOpen', event)">-->
+    <!--<i class="glyphicon glyphicon-calendar"></i>-->
+    <!--</button>-->
+    <!--</span>-->
+    <!--</p>-->
+    <!--<div-->
+    <!--uib-timepicker-->
+    <!--ng-model="event.endsAt"-->
+    <!--hour-step="1"-->
+    <!--minute-step="15"-->
+    <!--show-meridian="true">-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--<td>-->
+    <!--<button-->
+    <!--class="btn btn-danger"-->
+    <!--ng-click="events.splice($index, 1)">-->
+    <!--Delete-->
+    <!--</button>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
 
     <!--</table>-->
 </div>

@@ -7,7 +7,6 @@ module.service('Session', function () {
     profile :{}
   };
 
-
   this.create = function (profile) {
     this.user.profile = profile;
     this.user.isAuthenticated = true;
