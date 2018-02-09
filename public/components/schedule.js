@@ -164,6 +164,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
     $scope.fiterValues.store = '';
     sellersService.setSellectedSeller('');
     $scope.$broadcast('angucomplete-alt:clearInput');
+    $scope.events = settingProjectionSellers($scope.allSellers);
   }
 
   var setColorState = function (state) {
