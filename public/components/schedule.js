@@ -3,7 +3,10 @@ var module = angular.module('app')
 var controller = function ($scope, sellersService, moment, calendarConfig) {
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
-  // $scope.projection = [];
+  $scope.fiterValues = {
+    store : '',
+    seller :''
+  };
   $scope.calendarView = 'month'
   $scope.viewDate = new Date()
   var actions = [{
@@ -77,13 +80,22 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
 
   }
 
+  $scope.$watch(function () {
+    return sellersService.getSellectedSeller();
+  }, function () {
+    $scope.fiterValues.seller = sellersService.getSellectedSeller();
+    filterSeller($scope.fiterValues.seller);
+  }, true)
+
   $scope.switchStore = function (store) {
     if (store == 'Todas'){
-      $scope.events = settingProjectionSellers($scope.allSellers)
+      $scope.events = settingProjectionSellers($scope.allSellers);
+      $scope.fiterValues.store = store + ' las tiendas';
     }else{
       var filter = $scope.allSellers.filter(function (item) {
         return item.Store == store;
       })
+      $scope.fiterValues.store = store;
       $scope.events = settingProjectionSellers(filter);
     }
   }
@@ -105,9 +117,15 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
       }
     })
   }
+
+  var filterSeller = function (sellerName) {
+    var filter = $scope.allSellers.filter(function (item) {
+      return item.Store == sellerName;
+    })
+  }
 }
 
 module.component('schedule', {
   templateUrl: '../templates/schedule.html',
-  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig', controller]
+  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig',  controller]
 })

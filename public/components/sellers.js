@@ -4,8 +4,8 @@ var controller = function ($scope,sellersService) {
   var self = this;
   $scope.sellers = [];
   $scope.selectedSeller = function (seller) {
-    console.log(seller.originalObject.SellerName);
-    $scope.name = seller.originalObject.SellerName;
+    $scope.name = seller ? seller.originalObject.SellerName : '';
+    sellersService.setSellectedSeller($scope.name);
   };
 
   self.$onInit = function () {

@@ -1,8 +1,8 @@
 <div class="container">
     <h2 class="text-center">{{ calendarTitle }}</h2>
     <div class="row">
-        <div class="col-md-6">
-            <h4>Tiendas</h4>
+        <div class="col-md-4">
+            <h4>Tiendas:</h4>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -17,9 +17,14 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-6">
-            <h4>Vendedores</h4>
+        <div class="col-md-4">
+            <h4>Vendedores:</h4>
             <sellers></sellers>
+        </div>
+        <div class="col-md-4">
+            <h4>Valores filtrados:</h4>
+            <span class="label label-default">{{ fiterValues.store }}</span>
+            <span class="label label-default">{{ fiterValues.seller }}</span>
         </div>
     </div>
     <hr>

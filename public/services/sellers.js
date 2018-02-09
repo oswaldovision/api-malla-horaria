@@ -14,7 +14,17 @@ function service ($http) {
       return err
     })
   }
-  
+
+  this.selectedSeller = '';
+
+  this.setSellectedSeller = function (nameSeller) {
+    this.selectedSeller = nameSeller;
+  }
+
+  this.getSellectedSeller = function () {
+    return this.selectedSeller;
+  }
+
   this.getSellersProjection = function () {
     var req = {
       method: 'GET',
