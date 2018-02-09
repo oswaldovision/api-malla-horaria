@@ -117,7 +117,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
     return setSellers.map(function (seller) {
       return {
         title: seller.SellerName,
-        color: calendarConfig.colorTypes.warning,
+        color: setColorState(seller.State),
         startsAt: moment(seller.DateShift).toDate(),
         resizable: true
       }
@@ -148,6 +148,22 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
     $scope.fiterValues.store = '';
     sellersService.setSellectedSeller('');
     $scope.$broadcast('angucomplete-alt:clearInput');
+  }
+
+  var setColorState = function (state) {
+    switch (state) {
+      case "Vacaciones":
+        return calendarConfig.colorTypes.warning
+        break;
+      // case "Calamidad":
+      //   return calendarConfig.colorTypes.special
+      //   break;
+      // case "Incapacidad":
+      //   return calendarConfig.colorTypes.important
+      //   break;
+      default:
+        return calendarConfig.colorTypes.success
+    }
   }
 }
 
