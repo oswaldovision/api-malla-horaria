@@ -1,14 +1,30 @@
 var module = angular.module('app')
 
-var controller = function ($scope, sellersService, moment, calendarConfig) {
+var controller = function ($scope, sellersService, moment, calendarConfig, $window, $ocLazyLoad) {
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
   $scope.fiterValues = {
     store : '',
     seller :''
   };
-  $scope.calendarView = 'month'
-  $scope.viewDate = new Date()
+  $scope.calendarView = 'month';
+  $scope.viewDate = new Date();
+
+  var originali18n = angular.copy(calendarConfig.i18nStrings);
+  calendarConfig.i18nStrings.weekNumber = 'Semana {week}';
+
+  calendarConfig.dateFormatter = 'moment';
+  $window.moment = $window.moment || moment;
+  $ocLazyLoad.load('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js').then(function() {
+    moment.locale('es', {
+      week: {
+        dow: 1 // Monday is the first day of the week
+      }
+    });
+    moment.locale('es'); // change the locale to french
+  });
+
+
   var actions = [{
     label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
     onClick: function (args) {
@@ -169,5 +185,5 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
 
 module.component('schedule', {
   templateUrl: '../templates/schedule.html',
-  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig',  controller]
+  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig', '$window', '$ocLazyLoad',controller]
 })

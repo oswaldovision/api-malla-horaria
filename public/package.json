@@ -25,6 +25,7 @@
     "jquery": "^3.2.1",
     "moment": "^2.20.1",
     "ng-table": "^3.0.1",
+    "oclazyload": "^1.1.0",
     "satellizer": "^0.15.5"
   }
 }
