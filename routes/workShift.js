@@ -56,8 +56,9 @@ router.get('/sellers',(req,res) => {
   })
 })
 
-router.get('/sellersProjection',(req,res) =>{
-  let script = `SELECT SellerName,DateShift, Store  FROM [mng].[View_MNGResults]`
+router.get('/sellersProjection/:month',(req,res) =>{
+  let month = req.params.month || (new Date().getMonth()+1);
+  let script = `SELECT SellerName,DateShift, Store  FROM [mng].[View_MNGResults] WHERE MONTH(DateShift) = ${month}`
 
   execScript(script, (err, data) => {
     if (err) {

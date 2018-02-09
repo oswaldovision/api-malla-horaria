@@ -25,10 +25,10 @@ function service ($http) {
     return this.selectedSeller;
   }
 
-  this.getSellersProjection = function () {
+  this.getSellersProjection = function (month) {
     var req = {
       method: 'GET',
-      url: '/WorkShift/sellersProjection'
+      url: '/WorkShift/sellersProjection/' + month
     }
     return $http(req).then(function (data) {
       return data.data

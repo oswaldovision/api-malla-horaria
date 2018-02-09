@@ -84,24 +84,30 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
     return sellersService.getSellectedSeller();
   }, function () {
     $scope.fiterValues.seller = sellersService.getSellectedSeller();
-    filterSeller($scope.fiterValues.seller);
+    filterProjection($scope.fiterValues.seller);
   }, true)
 
   $scope.switchStore = function (store) {
-    if (store == 'Todas'){
-      $scope.events = settingProjectionSellers($scope.allSellers);
-      $scope.fiterValues.store = store + ' las tiendas';
-    }else{
-      var filter = $scope.allSellers.filter(function (item) {
-        return item.Store == store;
-      })
-      $scope.fiterValues.store = store;
-      $scope.events = settingProjectionSellers(filter);
-    }
+    $scope.fiterValues.store = store;
+    filterProjection();
+  }
+
+  $scope.clean = function () {
+    cleanFilter();
+  }
+
+  $scope.changeMonth = function () {
+    getSellers();
   }
 
   var getSellers = function () {
-    sellersService.getSellersProjection().then(function (allSellers) {
+    $scope.fiterValues.seller = '';
+    $scope.fiterValues.store = '';
+    $scope.$broadcast('angucomplete-alt:clearInput');
+    sellersService.setSellectedSeller('');
+
+
+    sellersService.getSellersProjection($scope.viewDate.getMonth() + 1).then(function (allSellers) {
       $scope.allSellers = allSellers.recordset;
       $scope.events = settingProjectionSellers($scope.allSellers)
     })
@@ -118,10 +124,30 @@ var controller = function ($scope, sellersService, moment, calendarConfig) {
     })
   }
 
-  var filterSeller = function (sellerName) {
-    var filter = $scope.allSellers.filter(function (item) {
-      return item.Store == sellerName;
-    })
+  var filterProjection = function() {
+    var setFiltered = $scope.allSellers ? $scope.allSellers : [];
+
+    if ($scope.fiterValues.store){
+      if ($scope.fiterValues.store !== 'Todas'){
+        setFiltered = setFiltered.filter(function (item) {
+          return item.Store == $scope.fiterValues.store;
+        })
+      }
+    }
+
+    if ($scope.fiterValues.seller){
+      setFiltered = setFiltered.filter(function (item) {
+        return item.SellerName == $scope.fiterValues.seller;
+      })
+    }
+     $scope.events = settingProjectionSellers(setFiltered);
+  }
+
+  var cleanFilter = function () {
+    $scope.fiterValues.seller = '';
+    $scope.fiterValues.store = '';
+    sellersService.setSellectedSeller('');
+    $scope.$broadcast('angucomplete-alt:clearInput');
   }
 }
 

@@ -25,6 +25,7 @@
             <h4>Valores filtrados:</h4>
             <span class="label label-default">{{ fiterValues.store }}</span>
             <span class="label label-default">{{ fiterValues.seller }}</span>
+            <button class="btn btn-info" type="button" ng-click="clean()"><i class="glyphicon glyphicon-refresh"></i></button>
         </div>
     </div>
     <hr>
@@ -33,27 +34,27 @@
         <div class="col-md-6 text-center">
             <div class="btn-group">
                 <button
-                        class="btn btn-primary"
+                        class="btn btn-info"
                         mwl-date-modifier
                         date="viewDate"
                         decrement="calendarView"
-                        ng-click="cellIsOpen = false">
+                        ng-click="cellIsOpen = false; changeMonth()">
                     Previo
                 </button>
                 <button
-                        class="btn btn-default"
+                        class="btn"
                         mwl-date-modifier
                         date="viewDate"
                         set-to-today
-                        ng-click="cellIsOpen = false">
+                        ng-click="cellIsOpen = false; changeMonth()">
                     Hoy
                 </button>
                 <button
-                        class="btn btn-primary"
+                        class="btn btn-info"
                         mwl-date-modifier
                         date="viewDate"
                         increment="calendarView"
-                        ng-click="cellIsOpen = false">
+                        ng-click="cellIsOpen = false; changeMonth()">
                     Siguiente
                 </button>
             </div>
@@ -63,9 +64,9 @@
 
         <div class="col-md-6 text-center">
             <div class="btn-group">
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'month'"
+                <label class="btn btn-info" ng-model="calendarView" uib-btn-radio="'month'"
                        ng-click="cellIsOpen = false">Mes</label>
-                <label class="btn btn-primary" ng-model="calendarView" uib-btn-radio="'week'"
+                <label class="btn btn-info" ng-model="calendarView" uib-btn-radio="'week'"
                        ng-click="cellIsOpen = false">Semana</label>
             </div>
         </div>
@@ -90,7 +91,7 @@
             on-timespan-click="timespanClicked(calendarDate, calendarCell)">
     </mwl-calendar>
 
-    <br><br><br>
+    <!--<br><br><br>-->
 
     <!--<h3 id="event-editor">-->
     <!--Edit events-->
