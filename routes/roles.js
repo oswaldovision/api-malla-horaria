@@ -4,7 +4,7 @@ const {checkAdmin} = require('./../middleware/authorize')
 const {checkCors} = require('./../middleware/whiteList')
 const {selectAll, execSp, execScript} = require('./../dbs/sql')
 
-router.get('/:user' , checkCors,checkAdmin,(req, res, next) => {
+router.get('/:user', checkAdmin, (req, res, next) => {
   selectAll('mng.Rol', (err, data) => {
     if (err) {
       res.status(500).send(err)
@@ -13,7 +13,7 @@ router.get('/:user' , checkCors,checkAdmin,(req, res, next) => {
   })
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAdmin, (req, res, next) => {
   var params = [{
     paramName: 'Name',
     type: 'String',

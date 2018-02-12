@@ -1,9 +1,10 @@
 const {selectAll, execSp, execScript} = require('./../dbs/sql')
 
 let checkAdmin = (req,res,next) =>{
-  const user = req.params['user']
-  if (!user)
+  const user = req.params['user'] || req.body.user
+  if (user == null){
     res.status(401).send({ message : 'se requiere ser administrador'})
+  }
 
   var params = [{
     paramName: 'Email',

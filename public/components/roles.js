@@ -1,32 +1,33 @@
 var module = angular.module('app')
 
 var controller = function ($scope, AuthService, Session, NgTableParams, $location, rolesService) {
-  $scope.$watch(function () {
-    return Session.user
-  }, function () {
-    if ($scope.isAdminApp){
-        AuthService.getRoles().then(function (data) {
-          $scope.roles = new NgTableParams({}, {dataset: data.data})
-        })
-    }
-  }, true)
+  $scope.rol = {
+    name: '',
+    description: ''
+  }
 
   this.$onInit = function () {
-    // rolesService.getRoles().then(function (allRoles) {
-    //   $scope.isAdminApp = true;
-    //   $scope.roles = new NgTableParams({}, {dataset: allRoles.recordset})
-    // })
+    getRoles();
   }
 
   $scope.addRol = function (rol) {
-    AuthService.addRol(rol.name,rol.description).then(function (result) {
+    rolesService.addRol(rol.name,rol.description, Session.user.profile.mail).then(function (result) {
       if (result.data.returnValue == 1){
-        $scope.roles.reload();
+        getRoles();
+        $scope.$apply();
       }
-
     })
   }
+
+  var getRoles = function () {
+    rolesService.getRoles(Session.user.profile.mail).then(function (allRoles) {
+      $scope.roles = new NgTableParams({}, {dataset: allRoles.recordset})
+    })
+  }
+
 }
+
+
 
 module.component('roles', {
   templateUrl: './../templates/roles.html',
