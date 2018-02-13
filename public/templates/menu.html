@@ -10,11 +10,13 @@
         <li class="active" ng-if="authenticated">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="glyphicon glyphicon-cog"></i>
-                Configuración
+                Admin
             </a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <a ui-sref="login" ui-sref-active="active">Users</a>
+                    <a ui-sref="users" ui-sref-active="active">
+                        Usuarios
+                    </a>
                 </li>
                 <li>
                     <a ui-sref="roles" ui-sref-active="active">
@@ -64,8 +66,8 @@
         <!--</li>-->
         <li ng-if="authenticated">
             <a ui-sref="asignements" ui-sref-active="active">
-                <i class="glyphicon glyphicon-tasks"></i>
-                Plan
+                <i class="glyphicon glyphicon-search"></i>
+                Buscar
             </a>
         </li>
         <!--<li ng-if="authenticated">-->

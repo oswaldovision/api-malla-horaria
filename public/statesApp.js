@@ -30,6 +30,12 @@ app.config(function ($stateProvider) {
     component : 'schedule'
   }
 
+  var userState = {
+    name: 'users',
+    url: '/users',
+    component : 'users'
+  }
+
   var unauthorizedState = {
     name: 'unauthorized',
     url: '/unauthorized',
@@ -42,6 +48,7 @@ app.config(function ($stateProvider) {
   $stateProvider.state(rolesState);
   $stateProvider.state(scheduleState);
   $stateProvider.state(unauthorizedState);
+  $stateProvider.state(userState);
   $stateProvider.state("default", {
     name: 'home',
     url: '',

@@ -10,7 +10,7 @@ router.get('/:user', checkAdmin, (req, res, next) => {
                           U.Name,
                           U.Address,
                           U.Phone,
-                          R.Name,
+                          R.Name AS rol_name,
                           R.IdRol
                           FROM mng.[User] U
                           LEFT JOIN mng.User_Rol UR ON U.IdUser = UR.IdUser
