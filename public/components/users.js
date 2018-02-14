@@ -22,6 +22,7 @@ var controller = function ($scope, AuthService, Session, NgTableParams, $locatio
   }
 
   var getUsers = function () {
+    console.log(Session.user.profile)
     usersService.getUsers(Session.user.profile.mail).then(function (allUsers) {
       $scope.users = new NgTableParams({}, {dataset: allUsers.recordset})
     })
