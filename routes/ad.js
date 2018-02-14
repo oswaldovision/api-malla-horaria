@@ -14,10 +14,10 @@ const ad = new activeDirectory(config)
 router.post('/login',(req, res) => {
   console.log(`url de configuracion: ${config.url}`)
   let body = {'email': req.body.email, 'password': req.body.password}
-  console.log(`usuario de logueo: ${body.email}`)
+  console.log(`usuario de login: ${body.email}`)
   ad.authenticate(body.email, body.password, function (err, auth) {
     if (err || !auth) {
-      res.status(401).send({message: `Loguin fallido`})
+      res.status(401).send({message: `Login fallido`})
       return
     }
 
