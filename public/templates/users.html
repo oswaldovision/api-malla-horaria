@@ -1,40 +1,53 @@
-<div class="row">
-    <h3>Usuarios</h3>
-    <table ng-table="users" class="table" show-filter="true">
-        <tr ng-repeat="row in $data">
-            <td title="'Id'" filter="{ IdUser: 'number'}" sortable="'IdUser'">
-                {{row.IdUser}}
-            </td>
-            <td title="'Nombre'" filter="{ Name: 'text'}" sortable="'Name'">
-                {{row.Name}}
-            </td>
-            <td title="'Email'" filter="{ Email: 'text'}" sortable="'Email'">
-                {{row.Email}}
-            </td>
-            <td title="'Dirección'" filter="{ Address: 'text'}" sortable="'Address'">
-                {{row.Address}}
-            </td>
-            <td title="'Phone'" filter="{ Phone: 'text'}" sortable="'Phone'">
-                {{row.Phone}}
-            </td>
-            <td title="'Rol'" filter="{ rol_name: 'text'}" sortable="'rol_name'">
-                {{row.rol_name}}
-            </td>
+<div class="container">
+    <div class="row">
+        <h3>Usuarios</h3>
+        <table ng-table="users" class="table" show-filter="true">
+            <tr ng-repeat="row in $data">
+                <td title="'Id'" filter="{ IdUser: 'number'}" sortable="'IdUser'">
+                    {{row.IdUser}}
+                </td>
+                <td title="'Nombre'" filter="{ Name: 'text'}" sortable="'Name'">
+                    {{row.Name}}
+                </td>
+                <td title="'Email'" filter="{ Email: 'text'}" sortable="'Email'">
+                    {{row.Email}}
+                </td>
+                <td title="'Dirección'" filter="{ Address: 'text'}" sortable="'Address'">
+                    {{row.Address}}
+                </td>
+                <td title="'Phone'" filter="{ Phone: 'text'}" sortable="'Phone'">
+                    {{row.Phone}}
+                </td>
+                <td title="'Rol'" filter="{ rol_name: 'text'}" sortable="'rol_name'">
+                    {{row.rol_name}}
+                </td>
 
-        </tr>
-    </table>
-</div>
-<div class="row">
-    <h3>Nuevo Usuario</h3>
-    <form ng-submit="addUser(user)" class="form-inline">
-        <div class="form-group">
-            <input class="form-control form-control-lg" type="text" ng-model="user.name" placeholder="Nombre"
-                   required>
-        </div>
-        <div class="form-group">
-            <input class="form-control form-control-sm" type="text" ng-model="user.description"
-                   placeholder="Description" required>
-        </div>
-        <button type="submit" class="btn btn-info navbar-btn">Adicionar</button>
-    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <h3>Nuevo Usuario</h3>
+        <form ng-submit="addUser(user)" name="formName" class="form-horizontal">
+            <div class="form-group">
+                <input class="form-control form-control-lg" type="email" ng-model="user.email" placeholder="email"
+                       required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="text" ng-model="user.name"
+                       placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="text" ng-model="user.address"
+                       placeholder="Dirección" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="number" ng-model="user.phone"
+                       placeholder="Teléfono" required>
+            </div>
+            <div class="form-group">
+                <select class="form-control form-control-sm" ng-model="selectedRol.IdRol" ng-options="rol.IdRol as rol.Name for rol in roles" required></select>
+            </div>
+            <button type="submit" class="btn btn-info navbar-btn">Guardar</button>
+        </form>
+    </div>
 </div>

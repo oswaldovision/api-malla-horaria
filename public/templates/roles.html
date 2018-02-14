@@ -1,31 +1,33 @@
-<div class="row">
-    <h3>Roles</h3>
-    <table ng-table="roles" class="table" show-filter="true">
-        <tr ng-repeat="row in $data">
-            <td title="'Id'" filter="{ IdRol: 'number'}" sortable="'IdRol'">
-                {{row.IdRol}}
-            </td>
-            <td title="'Nombre'" filter="{ Name: 'text'}" sortable="'Name'">
-                {{row.Name}}
-            </td>
-            <td title="'Descripción'" filter="{ Description: 'text'}" sortable="'Description'">
-                {{row.Description}}
-            </td>
+<div class="container">
+    <div class="row">
+        <h3>Roles</h3>
+        <table ng-table="roles" class="table" show-filter="true">
+            <tr ng-repeat="row in $data">
+                <td title="'Id'" filter="{ IdRol: 'number'}" sortable="'IdRol'">
+                    {{row.IdRol}}
+                </td>
+                <td title="'Nombre'" filter="{ Name: 'text'}" sortable="'Name'">
+                    {{row.Name}}
+                </td>
+                <td title="'Descripción'" filter="{ Description: 'text'}" sortable="'Description'">
+                    {{row.Description}}
+                </td>
 
-        </tr>
-    </table>
-</div>
-<div class="row">
-    <h3>Nuevo Rol</h3>
-    <form ng-submit="addRol(rol)" class="form-inline">
-        <div class="form-group">
-            <input class="form-control form-control-lg" type="text" ng-model="rol.name" placeholder="Nombre"
-                   required>
-        </div>
-        <div class="form-group">
-            <input class="form-control form-control-sm" type="text" ng-model="rol.description"
-                   placeholder="Description" required>
-        </div>
-        <button type="submit" class="btn btn-info navbar-btn">Adicionar</button>
-    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <h3>Nuevo Rol</h3>
+        <form ng-submit="addRol(rol)" class="form-inline">
+            <div class="form-group">
+                <input class="form-control form-control-lg" type="text" ng-model="rol.name" placeholder="Nombre"
+                       required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="text" ng-model="rol.description"
+                       placeholder="Description" required>
+            </div>
+            <button type="submit" class="btn btn-info navbar-btn">Guardar</button>
+        </form>
+    </div>
 </div>
