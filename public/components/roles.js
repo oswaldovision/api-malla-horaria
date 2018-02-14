@@ -11,7 +11,7 @@ var controller = function ($scope, AuthService, Session, NgTableParams, $locatio
   }
 
   $scope.addRol = function (rol) {
-    rolesService.addRol(rol.name,rol.description, Session.user.profile.mail).then(function (result) {
+    rolesService.addRol(rol.name,rol.description, Session.user.profile.userPrincipalName).then(function (result) {
       if (result.data.returnValue == 1){
         getRoles();
         $scope.$apply();
@@ -20,7 +20,7 @@ var controller = function ($scope, AuthService, Session, NgTableParams, $locatio
   }
 
   var getRoles = function () {
-    rolesService.getRoles(Session.user.profile.mail).then(function (allRoles) {
+    rolesService.getRoles(Session.user.profile.userPrincipalName).then(function (allRoles) {
       $scope.roles = new NgTableParams({}, {dataset: allRoles.recordset})
     })
   }
