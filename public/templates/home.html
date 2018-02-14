@@ -2,6 +2,8 @@
     <div ng-switch-when="true">
         <div class="alert alert-success" style="text-align: center">
             <span>Bienvenido  {{ currentUser.profile.cn }} !</span>
+            <span>Bienvenido  {{ currentUser.profile | json }} !</span>
+
         </div>
     </div>
     <div ng-switch-when="false">
