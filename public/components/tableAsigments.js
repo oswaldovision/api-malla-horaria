@@ -1,6 +1,6 @@
 var module = angular.module('app')
 
-var controller = function ($scope,$http, NgTableParams, AsignementService, Session) {
+var controller = function ($scope, NgTableParams, AsignementService, Session) {
   var self = this;
   $scope.asignements = [];
   $scope.authenticated = false;
@@ -43,7 +43,7 @@ var controller = function ($scope,$http, NgTableParams, AsignementService, Sessi
   $scope.loadAsignements = function () {
     $scope.start = new Date();
     $scope.end = new Date();
-    AsignementService.getAsignements($http).then(function (allAsignements) {
+    AsignementService.getAsignements().then(function (allAsignements) {
       $scope.asignements = allAsignements.recordset;
       $scope.tableParams = new NgTableParams({}, {dataset: []});
     })
@@ -56,5 +56,5 @@ var controller = function ($scope,$http, NgTableParams, AsignementService, Sessi
 
 module.component('tableAsigments', {
   templateUrl: '../templates/tableAsigments.html',
-  controller: ['$scope','$http', 'NgTableParams', 'AsignementService','Session', controller]
+  controller: ['$scope', 'NgTableParams', 'AsignementService','Session', controller]
 })
