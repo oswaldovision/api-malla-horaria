@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const url = require('url')
-const {execSp, selectAll, execScript} = require('./../dbs/sql')
+const {execSp, selectAll, execScript} = require('../../DA/security/adminDA')
 
 router.get('/RolesUser', (req, res) => {
   let url_parts = url.parse(req.url, true)

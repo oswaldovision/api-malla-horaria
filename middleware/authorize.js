@@ -1,4 +1,4 @@
-const {selectAll, execSp, execScript} = require('./../dbs/sql')
+const {selectAll, execSp, execScript} = require('../DA/security/adminDA')
 
 let checkAdmin = (req,res,next) =>{
   const user = req.params['user'] || req.body.user
@@ -11,7 +11,7 @@ let checkAdmin = (req,res,next) =>{
     type: 'String',
     value: user
   }]
-  execSp('[mng].[spCheckIsAdminApp]',params ,(err,data) => {
+  execSp('[dbo].[spCheckIsAdminApp]',params ,(err,data) => {
     if (err) {
       res.status(500).send(err)
       return

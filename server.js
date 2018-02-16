@@ -11,11 +11,11 @@ app.use(function (req, res, next) {
 
 require('./config/config')
 
-const WorkShift = require('./routes/workShift')
-const securityRoute = require('./routes/security')
-const ad = require('./routes/ad')
-const roles = require('./routes/roles')
-const users = require('./routes/users')
+const WorkShift = require('./routes/mango/workShift')
+const securityRoute = require('./routes/security/security')
+const ad = require('./routes/mango/ad')
+const roles = require('./routes/security/roles')
+const users = require('./routes/security/users')
 
 // app.get('/', function (req, res) {
 //   res.render('public/index.html')

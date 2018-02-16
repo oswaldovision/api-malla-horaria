@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const {checkAdmin} = require('./../middleware/authorize')
-const {checkCors} = require('./../middleware/whiteList')
-const {selectAll, execSp, execScript} = require('./../dbs/sql')
+const {checkAdmin} = require('../../middleware/authorize')
+const {checkCors} = require('../../middleware/whiteList')
+const {selectAll, execSp, execScript} = require('../../DA/security/adminDA')
 
 router.get('/:user', checkAdmin, (req, res, next) => {
   const getUsersScript = `SELECT U.IdUser,
@@ -12,9 +12,9 @@ router.get('/:user', checkAdmin, (req, res, next) => {
                           U.Phone,
                           R.Name AS rol_name,
                           R.IdRol
-                          FROM mng.[User] U
-                          LEFT JOIN mng.User_Rol UR ON U.IdUser = UR.IdUser
-                          LEFT JOIN mng.Rol R ON UR.IdRol = R.IdRol
+                          FROM [dbo].[User] U
+                          LEFT JOIN dbo.User_Rol UR ON U.IdUser = UR.IdUser
+                          LEFT JOIN dbo.Rol R ON UR.IdRol = R.IdRol
                           WHERE R.IdApp = 1`
   execScript(getUsersScript, (err, data) => {
     if (err) {
@@ -51,7 +51,7 @@ router.post('/:user', checkAdmin, (req, res, next) => {
       value: req.body.idRol
     }]
 
-  execSp('[mng].[spInsertUser]', params, (err, data) => {
+  execSp('[dbo].[spInsertUser]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)
     }

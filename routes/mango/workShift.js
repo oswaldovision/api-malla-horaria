@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {checkCors} = require('./../middleware/whiteList')
-const {selectAll, execSp, execScript} = require('./../dbs/sql')
+const {checkCors} = require('../../middleware/whiteList')
+const {selectAll, execSp, execScript} = require('../../DA/mango/mangoDA')
 
 router.get('/', checkCors , (req, res, next) => {
 
-  selectAll('mng.WorkShift', (err, data) => {
+  selectAll('[dbo].[View_MNGResults]', (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
@@ -31,7 +31,7 @@ router.get('/fromSp', (req, res) => {
 })
 
 router.get('/range', (req, res) => {
-  let script = `SELECT * FROM [mng].[View_MNGResults] 
+  let script = `SELECT * FROM [dbo].[View_MNGResults]
                 WHERE DateShift >= '${req.query.start}T00:00:00.000' AND 
                 DateShift <= '${req.query.end}T12:00:00.000'
                 ORDER by DateShift`
@@ -46,7 +46,7 @@ router.get('/range', (req, res) => {
 })
 
 router.get('/sellers',(req,res) => {
-  let script = `SELECT distinct SellerName FROM [mng].[View_MNGResults]`
+  let script = `SELECT distinct SellerName FROM [dbo].[View_MNGResults]`
 
   execScript(script, (err, data) => {
     if (err) {
@@ -58,7 +58,7 @@ router.get('/sellers',(req,res) => {
 
 router.get('/sellersProjection/:month',(req,res) =>{
   let month = req.params.month || (new Date().getMonth()+1);
-  let script = `SELECT SellerName,DateShift, Store, State  FROM [mng].[View_MNGResults] WHERE MONTH(DateShift) = ${month}`
+  let script = `SELECT SellerName,DateShift, Store, State  FROM [dbo].[View_MNGResults] WHERE MONTH(DateShift) = ${month}`
 
   execScript(script, (err, data) => {
     if (err) {

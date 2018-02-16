@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {checkAdmin} = require('./../middleware/authorize')
-const {checkCors} = require('./../middleware/whiteList')
-const {selectAll, execSp, execScript} = require('./../dbs/sql')
+const {checkAdmin} = require('../../middleware/authorize')
+const {checkCors} = require('../../middleware/whiteList')
+const {selectAll, execSp, execScript} = require('../../DA/security/adminDA')
 
 router.get('/:user', checkAdmin, (req, res, next) => {
-  selectAll('mng.Rol', (err, data) => {
+  selectAll('dbo.Rol', (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
@@ -25,7 +25,7 @@ router.post('/', checkAdmin, (req, res, next) => {
       value: req.body.description
     }]
 
-  execSp('[mng].[spInsertRol]', params, (err, data) => {
+  execSp('[dbo].[spInsertRol]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
