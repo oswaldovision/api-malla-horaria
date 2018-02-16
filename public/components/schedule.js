@@ -4,7 +4,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
   $scope.fiterValues = {
-    store : '',
+    stores : '',
     seller :''
   };
   $scope.calendarView = 'month';
@@ -104,7 +104,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }, true)
 
   $scope.switchStore = function (store) {
-    $scope.fiterValues.store = store;
+    $scope.fiterValues.stores = stores;
     filterProjection();
   }
 
@@ -118,7 +118,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
 
   var getSellers = function () {
     $scope.fiterValues.seller = '';
-    $scope.fiterValues.store = '';
+    $scope.fiterValues.stores = '';
     $scope.$broadcast('angucomplete-alt:clearInput');
     sellersService.setSellectedSeller('');
 
@@ -143,10 +143,10 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   var filterProjection = function() {
     var setFiltered = $scope.allSellers ? $scope.allSellers : [];
 
-    if ($scope.fiterValues.store){
-      if ($scope.fiterValues.store !== 'Todas'){
+    if ($scope.fiterValues.stores){
+      if ($scope.fiterValues.stores !== 'Todas'){
         setFiltered = setFiltered.filter(function (item) {
-          return item.Store == $scope.fiterValues.store;
+          return item.Store == $scope.fiterValues.stores;
         })
       }
     }
@@ -161,7 +161,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
 
   var cleanFilter = function () {
     $scope.fiterValues.seller = '';
-    $scope.fiterValues.store = '';
+    $scope.fiterValues.stores = '';
     sellersService.setSellectedSeller('');
     $scope.$broadcast('angucomplete-alt:clearInput');
     $scope.events = settingProjectionSellers($scope.allSellers);

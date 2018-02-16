@@ -19,12 +19,12 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
   }, true)
 
   $scope.switchStore = function (store) {
-    if (store == 'todas'){
+    if (stores == 'todas'){
       $scope.tableParams = new NgTableParams({}, {dataset: $scope.asignements});
     }else {
       $scope.tableParams = new NgTableParams({}, {
         dataset: $scope.asignements.filter(function (item) {
-          return item.Store == store;
+          return item.Store == stores;
         })
       })
     }

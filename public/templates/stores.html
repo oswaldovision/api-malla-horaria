@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <h3>Roles</h3>
+        <table ng-table="stores" class="table" show-filter="true">
+            <tr ng-repeat="row in $data">
+                <td title="'Id'" filter="{ id_store: 'number'}" sortable="'id_store'">
+                    {{row.id_store}}
+                </td>
+                <td title="'Nombre'" filter="{ name: 'text'}" sortable="'name'">
+                    {{row.name}}
+                </td>
+                <td title="'Teléfono'" filter="{ phone: 'text'}" sortable="'phone'">
+                    {{row.phone}}
+                </td>
+                <td title="'Dirección'" filter="{ address: 'text'}" sortable="'address'">
+                    {{row.address}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <h3>Nueva tienda</h3>
+        <form ng-submit="addStore(store)" class="form-horizontal">
+            <div class="form-group">
+                <input class="form-control form-control-lg" type="text" ng-model="store.name" placeholder="Nombre"
+                       required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="text" ng-model="store.phone"
+                       placeholder="Teléfono" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control form-control-sm" type="text" ng-model="store.address"
+                       placeholder="Dirección" required>
+            </div>
+            <button type="submit" class="btn btn-info navbar-btn">Guardar</button>
+        </form>
+    </div>
+</div>

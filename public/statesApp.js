@@ -36,6 +36,12 @@ app.config(function ($stateProvider) {
     component : 'users'
   }
 
+  var storeState = {
+    name: 'stores',
+    url: '/stores',
+    component : 'stores'
+  }
+
   var unauthorizedState = {
     name: 'unauthorized',
     url: '/unauthorized',
@@ -49,6 +55,7 @@ app.config(function ($stateProvider) {
   $stateProvider.state(scheduleState);
   $stateProvider.state(unauthorizedState);
   $stateProvider.state(userState);
+  $stateProvider.state(storeState);
   $stateProvider.state("default", {
     name: 'home',
     url: '',

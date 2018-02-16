@@ -16,6 +16,7 @@ const securityRoute = require('./routes/security/security')
 const ad = require('./routes/mango/ad')
 const roles = require('./routes/security/roles')
 const users = require('./routes/security/users')
+const stores = require('./routes/security/stores')
 
 // app.get('/', function (req, res) {
 //   res.render('public/index.html')
@@ -27,6 +28,7 @@ app.use('/security', securityRoute)
 app.use('/ad', ad)
 app.use('/roles', roles)
 app.use('/users', users)
+app.use('/stores', stores)
 
 
 
