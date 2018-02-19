@@ -25,6 +25,14 @@ router.post('/', checkAdmin, (req, res, next) => {
       value: req.body.description
     }]
 
+  if (req.body.idStore){
+    params.push({
+      paramName: 'id_store',
+      type: 'Int',
+      value: req.body.idStore
+    })
+  }
+
   execSp('[dbo].[spInsertRol]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)

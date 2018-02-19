@@ -16,12 +16,12 @@ function service ($http, $location) {
     })
   }
 
-  this.addRol = function (name, description, user) {
+  this.addRol = function (name, description, idStore, user) {
     let config = {
       url : '/roles',
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
       method: "POST",
-      data: { name, description ,user}
+      data: { name, description , idStore,user}
     }
 
     return $http(config).then(function (data) {
