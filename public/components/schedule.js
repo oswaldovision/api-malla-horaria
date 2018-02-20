@@ -104,7 +104,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }, true)
 
   $scope.switchStore = function (store) {
-    $scope.fiterValues.stores = stores;
+    $scope.fiterValues.stores = store;
     filterProjection();
   }
 
