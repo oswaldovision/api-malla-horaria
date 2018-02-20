@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const activeDirectory = require('activedirectory')
+const {selectAll, execSp, execScript} = require('../../DA/security/adminDA')
 
 const config = {
   url: process.env.LDAP_url,
@@ -14,7 +15,6 @@ const ad = new activeDirectory(config)
 router.post('/login',(req, res) => {
   console.log(`url de configuracion: ${config.url}`)
   let body = {'email': req.body.email, 'password': req.body.password}
-  console.log(`usuario de login: ${body.email}`)
   ad.authenticate(body.email, body.password, function (err, auth) {
     if (err || !auth) {
       res.status(401).send({message: `Login fallido`})
@@ -26,10 +26,22 @@ router.post('/login',(req, res) => {
         res.status(404).send({message: `error obtain user ${body.email}: ${err} `})
         return
       }
-      user.isAdmin = req.isAdmin
-      res.status(200).send(user)
-    })
 
+      var params = [{
+        paramName: 'Email',
+        type: 'String',
+        value: body.email
+      }]
+
+      execSp('[dbo].[spGetRolesStoresByEmail]', params , (err,data) =>{
+        if (err) {
+          res.status(404).send({message: `error obtain roles ${body.email}: ${err} `})
+          return
+        }
+        user.roles = data.recordset;
+        res.status(200).send(user)
+      })
+    })
   })
 })
 
