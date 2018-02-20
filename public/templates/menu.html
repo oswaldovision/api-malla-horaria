@@ -8,29 +8,6 @@
     </div>
 
     <ul class="list-unstyled components">
-        <li class="active" ng-if="authenticated">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
-                <i class="glyphicon glyphicon-cog"></i>
-                Admin
-            </a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a ui-sref="users" ui-sref-active="active">
-                        Usuarios
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="roles" ui-sref-active="active">
-                        Roles
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="stores" ui-sref-active="active">
-                        Tiendas
-                    </a>
-                </li>
-            </ul>
-        </li>
         <!--<li>-->
             <!--<a href="#">-->
                 <!--<i class="glyphicon glyphicon-briefcase"></i>-->
@@ -70,7 +47,7 @@
                 <!--login-->
             <!--</a>-->
         <!--</li>-->
-        <li ng-if="authenticated">
+        <li ng-if="hasRole('Admin_App')">
             <a ui-sref="asignements" ui-sref-active="active">
                 <i class="glyphicon glyphicon-search"></i>
                 Buscar
@@ -82,11 +59,34 @@
                 <!--chart-->
             <!--</a>-->
         <!--</li>-->
-        <li ng-if="authenticated">
+        <li ng-if="hasRole('Admin_App')">
             <a ui-sref="schedule" ui-sref-active="active">
                 <i class="glyphicon glyphicon-calendar"></i>
                 Proyección
             </a>
+        </li>
+        <li class="active" ng-if="hasRole('Admin_App')">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                <i class="glyphicon glyphicon-cog"></i>
+                Admin
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a ui-sref="users" ui-sref-active="active">
+                        Usuarios
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="roles" ui-sref-active="active">
+                        Roles
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="stores" ui-sref-active="active">
+                        Tiendas
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
     <!--<ul class="list-unstyled CTAs">-->
