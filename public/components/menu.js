@@ -2,11 +2,13 @@ var module = angular.module('app');
 
 var controller = function ($scope, Session) {
   $scope.roles = [];
+  $scope.stores = [];
   $scope.$watch(function () {
     return Session.user;
   }, function () {
     $scope.currentUser = Session.user;
     $scope.roles = Session.user.isAuthenticated ? getRoles(Session.user.profile.roles) : [];
+    $scope.stores = Session.user.isAuthenticated ? getStores(Session.user.profile.roles) : [];
   }, true)
 
   var getRoles = function (roles) {
@@ -15,8 +17,18 @@ var controller = function ($scope, Session) {
     });
   }
 
+  var getStores = function (stores) {
+    return stores.map(function(store){
+      return store.Store;
+    });
+  }
+
   $scope.hasRole = function (role) {
     return $scope.roles.indexOf(role) != -1;
+  }
+
+  $scope.hasStore = function () {
+    return $scope.stores.length;
   }
 }
 

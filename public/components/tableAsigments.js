@@ -16,6 +16,8 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
   }, function () {
     $scope.currentUser = Session.user;
     $scope.authenticated = $scope.currentUser.isAuthenticated;
+    $scope.roles = Session.user.isAuthenticated ? getRoles(Session.user.profile.roles) : [];
+    $scope.stores = Session.user.isAuthenticated ? getStores(Session.user.profile.roles) : [];
   }, true)
 
   $scope.switchStore = function (store) {
@@ -35,7 +37,7 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
     var dateEnd = end.getFullYear() + '-' + formatLessNine(end.getMonth() + 1) + '-' + formatLessNine(end.getDate());
 
     AsignementService.getAsignementsRange(dateStart, dateEnd).then(function (allAsignements) {
-      $scope.asignements = allAsignements.recordset;
+      $scope.asignements = $scope.hasRole('Admin_App') ? allAsignements.recordset : filterAssignementsByRol(allAsignements.recordset);;
       $scope.tableParams = new NgTableParams({}, {dataset: $scope.asignements});
     })
   }
@@ -44,13 +46,39 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
     $scope.start = new Date();
     $scope.end = new Date();
     AsignementService.getAsignements().then(function (allAsignements) {
-      $scope.asignements = allAsignements.recordset;
+      $scope.asignements = $scope.hasRole('Admin_App') ? allAsignements.recordset : filterAssignementsByRol(allAsignements.recordset);
       $scope.tableParams = new NgTableParams({}, {dataset: []});
     })
   }
 
+  $scope.hasRole = function (role) {
+    return $scope.roles.indexOf(role) != -1;
+  }
+
   var formatLessNine = function(num) {
     return num.toString().length < 2 ? ('0' + num) : num
+  }
+
+  var getRoles = function (roles) {
+    return roles.map(function(rol){
+      return rol.Rol;
+    });
+  }
+
+  var getStores = function (stores) {
+    return stores.map(function(store){
+      return store.Store;
+    });
+  }
+
+  var filterAssignementsByRol = function (assignements) {
+    var result = [];
+    $scope.stores.forEach(function (store) {
+      result = result.concat(assignements.filter(function (ele) {
+        return ele.Store == store;
+      }))
+    })
+    return result;
   }
 }
 

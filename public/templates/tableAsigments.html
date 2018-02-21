@@ -1,5 +1,6 @@
-<div ng-switch="authenticated">
+<div ng-switch="authenticated" class="container">
     <div ng-switch-when="true">
+        <h1>Asignaciones</h1>
         <div class="row">
             <div class="col-md-6">
                 <h4>Tiendas</h4>
@@ -8,28 +9,19 @@
                         Seleccione tienda... <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a ng-click="switchStore('Chapinero')">Chapinero</a></li>
-                        <li><a ng-click="switchStore('Colina')">Colina</a></li>
-                        <li><a ng-click="switchStore('Multiplaza')">Multiplaza</a></li>
+                        <li ng-repeat="store in stores">
+                            <a ng-click="switchStore(store)">{{store}}</a>
+                        </li>
                         <li role="separator" class="divider"></li>
                         <li><a ng-click="switchStore('todas')">Todas</a></li>
                     </ul>
                 </div>
-                <!--<h4>Tiendas</h4>-->
-                <!--<div class="btn-group btn-group-lg" role="group" aria-label="...">-->
-                    <!--<button type="button" ng-click="switchStore('todas')" class="btn btn-info">Todas</button>-->
-                    <!--<button type="button" ng-click="switchStore('Chapinero')" class="btn btn-info">Chapinero</button>-->
-                    <!--<button type="button" ng-click="switchStore('Colina')" class="btn btn-info">Colina</button>-->
-                    <!--<button type="button" ng-click="switchStore('Multiplaza')" class="btn btn-info">Multiplaza</button>-->
-                <!--</div>-->
             </div>
             <div class="col-md-6">
                 <h4>Rango fecha</h4>
                 <form class="form-inline" ng-submit="range(start,end)">
                     <label class="sr-only" for="txtStart">Fecha inicio</label>
                     <input type="date" class="form-control mb-2 mr-sm-2" id="txtStart" ng-model="start" required>
-
-
                     <label class="sr-only" for="txtEnd">Fecha fin</label>
                     <div class="input-group mb-2 mr-sm-2">
                         <input type="date" class="form-control" id="txtEnd" ng-model="end" required>
