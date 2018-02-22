@@ -1,6 +1,6 @@
 var module = angular.module('app')
 
-var controller = function ($scope, sellersService, moment, calendarConfig, $window, $ocLazyLoad) {
+var controller = function ($scope, sellersService, moment, calendarConfig, $window, $ocLazyLoad, Session, storesService) {
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
   $scope.fiterValues = {
@@ -97,11 +97,29 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }
 
   $scope.$watch(function () {
+    return Session.user;
+  },function () {
+    $scope.currentUser = Session.user;
+    $scope.authenticated = $scope.currentUser.isAuthenticated;
+    $scope.roles = Session.user.isAuthenticated ? getRoles(Session.user.profile.roles) : [];
+    if (Session.user.isAuthenticated && $scope.hasRole('Admin_App')){
+      getAllStores();
+    }else if (Session.user.isAuthenticated){
+      $scope.stores = getStoresInProfile(Session.user.profile.roles)
+    }
+
+  },true)
+
+  $scope.$watch(function () {
     return sellersService.getSellectedSeller();
   }, function () {
     $scope.fiterValues.seller = sellersService.getSellectedSeller();
     filterProjection($scope.fiterValues.seller);
   }, true)
+
+  $scope.hasRole = function (role) {
+    return $scope.roles.indexOf(role) != -1;
+  }
 
   $scope.switchStore = function (store) {
     $scope.fiterValues.stores = store;
@@ -122,9 +140,8 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
     $scope.$broadcast('angucomplete-alt:clearInput');
     sellersService.setSellectedSeller('');
 
-
     sellersService.getSellersProjection($scope.viewDate.getMonth() + 1).then(function (allSellers) {
-      $scope.allSellers = allSellers.recordset;
+      $scope.allSellers = $scope.hasRole('Admin_App') ? allSellers.recordset : filterAssignementsByRol(allSellers.recordset);
       $scope.events = settingProjectionSellers($scope.allSellers)
     })
   }
@@ -132,7 +149,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   var settingProjectionSellers = function (setSellers) {
     return setSellers.map(function (seller) {
       return {
-        title: seller.SellerName,
+        title: seller.SellerName + ' (' + seller.Store + ')' ,
         color: setColorState(seller.State),
         startsAt: moment(seller.DateShift).toDate(),
         resizable: true
@@ -182,9 +199,39 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
         return calendarConfig.colorTypes.success
     }
   }
+
+  var getRoles = function (roles) {
+    return roles.map(function(rol){
+      return rol.Rol;
+    });
+  }
+
+  var getAllStores = function () {
+    storesService.getStores($scope.currentUser.profile.userPrincipalName).then(function(data){
+      $scope.stores = data.recordset.map(function(store){
+        return store.name;
+      });
+    })
+  }
+
+  var getStoresInProfile = function (stores) {
+    return stores.map(function(store){
+      return store.Store;
+    })
+  }
+
+  var filterAssignementsByRol = function (assignements) {
+    var result = [];
+    $scope.stores.forEach(function (store) {
+      result = result.concat(assignements.filter(function (ele) {
+        return ele.Store == store;
+      }))
+    })
+    return result;
+  }
 }
 
 module.component('schedule', {
   templateUrl: '../templates/schedule.html',
-  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig', '$window', '$ocLazyLoad',controller]
+  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig', '$window', '$ocLazyLoad','Session','storesService',controller]
 })

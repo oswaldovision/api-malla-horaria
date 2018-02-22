@@ -75,7 +75,6 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
       })
   }
 
-
   var getAllStores = function () {
     storesService.getStores($scope.currentUser.profile.userPrincipalName).then(function(data){
       $scope.stores = data.recordset.map(function(store){
