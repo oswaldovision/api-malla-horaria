@@ -1,6 +1,6 @@
 var module = angular.module('app')
 
-var controller = function ($scope, NgTableParams, AsignementService, Session) {
+var controller = function ($scope, NgTableParams, AsignementService, Session, storesService) {
   var self = this;
   $scope.asignements = [];
   $scope.authenticated = false;
@@ -17,7 +17,11 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
     $scope.currentUser = Session.user;
     $scope.authenticated = $scope.currentUser.isAuthenticated;
     $scope.roles = Session.user.isAuthenticated ? getRoles(Session.user.profile.roles) : [];
-    $scope.stores = Session.user.isAuthenticated ? getStores(Session.user.profile.roles) : [];
+    if (Session.user.isAuthenticated && $scope.hasRole('Admin_App')){
+      getAllStores();
+    }else if (Session.user.isAuthenticated){
+      $scope.stores = getStoresInProfile(Session.user.profile.roles)
+    }
   }, true)
 
   $scope.switchStore = function (store) {
@@ -65,10 +69,19 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
     });
   }
 
-  var getStores = function (stores) {
-    return stores.map(function(store){
-      return store.Store;
-    });
+  var getStoresInProfile = function (stores) {
+      return stores.map(function(store){
+        return store.Store;
+      })
+  }
+
+
+  var getAllStores = function () {
+    storesService.getStores($scope.currentUser.profile.userPrincipalName).then(function(data){
+      $scope.stores = data.recordset.map(function(store){
+        return store.name;
+      });
+    })
   }
 
   var filterAssignementsByRol = function (assignements) {
@@ -84,5 +97,5 @@ var controller = function ($scope, NgTableParams, AsignementService, Session) {
 
 module.component('tableAsigments', {
   templateUrl: '../templates/tableAsigments.html',
-  controller: ['$scope', 'NgTableParams', 'AsignementService','Session', controller]
+  controller: ['$scope', 'NgTableParams', 'AsignementService','Session','storesService' , controller]
 })
