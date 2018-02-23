@@ -32,4 +32,6 @@ module.service('Session', function () {
     else
       return true;
   }
+
+  this.clickedSeller = '';
 })

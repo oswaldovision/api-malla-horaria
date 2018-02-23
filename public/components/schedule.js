@@ -1,6 +1,6 @@
 var module = angular.module('app')
 
-var controller = function ($scope, sellersService, moment, calendarConfig, $window, $ocLazyLoad, Session, storesService) {
+var controller = function ($scope,$location, sellersService, moment, calendarConfig, $window, $ocLazyLoad, Session, storesService) {
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
   $scope.authenticated = false;
@@ -56,7 +56,9 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }
 
   $scope.eventClicked = function (event) {
-    alert.show('Clicked', event)
+    Session.clickedSeller = event.title.split('(')[0].trim();
+    $location.path('/asignements')
+    // alert.show('Clicked', event)
   }
 
   $scope.eventEdited = function (event) {
@@ -237,5 +239,5 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
 
 module.component('schedule', {
   templateUrl: '../templates/schedule.html',
-  controller: ['$scope', 'sellersService', 'moment', 'calendarConfig', '$window', '$ocLazyLoad','Session','storesService',controller]
+  controller: ['$scope', '$location', 'sellersService', 'moment', 'calendarConfig', '$window', '$ocLazyLoad','Session','storesService',controller]
 })
