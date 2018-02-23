@@ -3,6 +3,7 @@ var module = angular.module('app')
 var controller = function ($scope, sellersService, moment, calendarConfig, $window, $ocLazyLoad, Session, storesService) {
   //These variables MUST be set as a minimum for the calendar to work
   var self = this
+  $scope.authenticated = false;
   $scope.fiterValues = {
     stores : '',
     seller :''
@@ -38,7 +39,7 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }]
 
   self.$onInit = function () {
-    getSellers()
+      getSellers()
   }
 
   $scope.cellIsOpen = false
@@ -135,15 +136,18 @@ var controller = function ($scope, sellersService, moment, calendarConfig, $wind
   }
 
   var getSellers = function () {
+
     $scope.fiterValues.seller = '';
     $scope.fiterValues.stores = '';
     $scope.$broadcast('angucomplete-alt:clearInput');
     sellersService.setSellectedSeller('');
 
-    sellersService.getSellersProjection($scope.viewDate.getMonth() + 1).then(function (allSellers) {
-      $scope.allSellers = $scope.hasRole('Admin_App') ? allSellers.recordset : filterAssignementsByRol(allSellers.recordset);
-      $scope.events = settingProjectionSellers($scope.allSellers)
-    })
+    if (Session.user.isAuthenticated){
+      sellersService.getSellersProjection($scope.viewDate.getMonth() + 1).then(function (allSellers) {
+        $scope.allSellers = $scope.hasRole('Admin_App') ? allSellers.recordset : filterAssignementsByRol(allSellers.recordset);
+        $scope.events = settingProjectionSellers($scope.allSellers)
+      })
+    }
   }
 
   var settingProjectionSellers = function (setSellers) {

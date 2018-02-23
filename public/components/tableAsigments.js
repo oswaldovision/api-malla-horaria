@@ -51,7 +51,7 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
     $scope.end = new Date();
     AsignementService.getAsignements().then(function (allAsignements) {
       $scope.asignements = $scope.hasRole('Admin_App') ? allAsignements.recordset : filterAssignementsByRol(allAsignements.recordset);
-      $scope.tableParams = new NgTableParams({}, {dataset: []});
+      $scope.tableParams = new NgTableParams({}, {dataset: $scope.asignements});
     })
   }
 

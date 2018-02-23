@@ -57,9 +57,9 @@ app.config(function ($stateProvider) {
   $stateProvider.state(userState);
   $stateProvider.state(storeState);
   $stateProvider.state("default", {
-    name: 'home',
-    url: '',
-    component : 'home'
+    name: 'schedule',
+    url: '/schedule',
+    component : 'schedule'
   })
 });
 

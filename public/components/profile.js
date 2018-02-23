@@ -34,7 +34,7 @@ var controller = function ($scope, AuthService, Session, $location,$timeout) {
       }else{
         $scope.formLogin = false;
         // AuthService.getRolesUser(data.mail)
-        $location.path('/');
+        $location.path('/schedule');
       }
     }).catch(function (er) {
       console.log('usuario erro' + er)
