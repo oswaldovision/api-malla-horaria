@@ -42,7 +42,7 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
       getSellers()
   }
 
-  $scope.cellIsOpen = false
+  $scope.cellIsOpen = false;
 
   $scope.addEvent = function () {
     $scope.events.push({
@@ -65,6 +65,10 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
     alert.show('Edited', event)
   }
 
+  // $scope.dateClicked =  function(date){
+  //   console.log(date);
+  // }
+
   $scope.eventDeleted = function (event) {
     alert.show('Deleted', event)
   }
@@ -80,23 +84,22 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
   }
 
   $scope.timespanClicked = function (date, cell) {
-
+    console.log($scope.cellIsOpen)
     if ($scope.calendarView === 'month') {
       if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-        $scope.cellIsOpen = false
+        $scope.cellIsOpen = false;
       } else {
-        $scope.cellIsOpen = true
-        $scope.viewDate = date
+        $scope.cellIsOpen = true;
+        $scope.viewDate = date;
       }
     } else if ($scope.calendarView === 'year') {
       if (($scope.cellIsOpen && moment(date).startOf('month').isSame(moment($scope.viewDate).startOf('month'))) || cell.events.length === 0) {
-        $scope.cellIsOpen = false
+        $scope.cellIsOpen = false;
       } else {
-        $scope.cellIsOpen = true
-        $scope.viewDate = date
+        $scope.cellIsOpen = true;
+        $scope.viewDate = date;
       }
     }
-
   }
 
   $scope.$watch(function () {
@@ -133,12 +136,23 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
     cleanFilter();
   }
 
-  $scope.changeMonth = function () {
-    getSellers();
+  $scope.changeMonth = function (date) {
+    var month = getNumMonth(date.split(' ')[0])
+    if (Session.user.isAuthenticated){
+      sellersService.getSellersProjection(month).then(function (allSellers) {
+        $scope.allSellers = $scope.hasRole('Admin_App') ? allSellers.recordset : filterAssignementsByRol(allSellers.recordset);
+        $scope.events = settingProjectionSellers($scope.allSellers)
+      })
+    }
   }
 
-  var getSellers = function () {
+  $scope.viewChangeClicked = function(date) {
+    if (date === 'day') {
+      return false;
+    }
+  };
 
+  var getSellers = function () {
     $scope.fiterValues.seller = '';
     $scope.fiterValues.stores = '';
     $scope.$broadcast('angucomplete-alt:clearInput');
@@ -234,6 +248,24 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
       }))
     })
     return result;
+  }
+
+  var getNumMonth = function (value) {
+    var months = {
+      "Enero" : 1,
+      "Febrero" : 2,
+      "Marzo" : 3,
+      "Abril" : 4,
+      "Mayo" : 5,
+      "Junio" : 6,
+      "Julio" : 7,
+      "Agosto" : 8,
+      "Septiembre" : 9,
+      "Octubre" : 10,
+      "Noviembre" : 11,
+      "Diciembre" : 12
+    }
+    return months[value];
   }
 }
 

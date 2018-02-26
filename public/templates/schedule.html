@@ -1,6 +1,6 @@
 <div class="container" ng-switch="authenticated">
     <div ng-switch-when="true">
-        <h2 class="text-center">{{ calendarTitle }}</h2>
+        <h2 class="text-center">{{ calendarTitle }}  </h2>
         <div class="row">
             <div class="col-md-4">
                 <h4>Tiendas:</h4>
@@ -41,7 +41,7 @@
                             mwl-date-modifier
                             date="viewDate"
                             decrement="calendarView"
-                            ng-click="cellIsOpen = false; changeMonth()">
+                            ng-click="cellIsOpen = false; changeMonth(calendarTitle)">
                         Previo
                     </button>
                     <button
@@ -49,7 +49,7 @@
                             mwl-date-modifier
                             date="viewDate"
                             set-to-today
-                            ng-click="cellIsOpen = false; changeMonth()">
+                            ng-click="cellIsOpen = false; changeMonth(calendarTitle)">
                         Hoy
                     </button>
                     <button
@@ -57,7 +57,7 @@
                             mwl-date-modifier
                             date="viewDate"
                             increment="calendarView"
-                            ng-click="cellIsOpen = false; changeMonth()">
+                            ng-click="cellIsOpen = false; changeMonth(calendarTitle)">
                         Siguiente
                     </button>
                 </div>
@@ -91,7 +91,8 @@
                 day-view-split="30"
                 cell-modifier="modifyCell(calendarCell)"
                 cell-auto-open-disabled="true"
-                on-timespan-click="timespanClicked(calendarDate, calendarCell)">
+                on-timespan-click="timespanClicked(calendarDate, calendarCell)"
+                on-view-change-click="viewChangeClicked(calendarNextView)">
         </mwl-calendar>
 
         <!--<br><br><br>-->
