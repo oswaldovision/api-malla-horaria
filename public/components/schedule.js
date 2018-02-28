@@ -171,7 +171,7 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
       return {
         title: seller.SellerName + ' (' + seller.Store + ')' ,
         color: setColorState(seller.State),
-        startsAt: moment(seller.DateShift).toDate(),
+        startsAt: moment(seller.DateShift.split('T')[0]).toDate(),
         resizable: true
       }
     })
