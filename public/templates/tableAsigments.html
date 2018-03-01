@@ -45,8 +45,8 @@
                     <td title="'Turno'" filter="{ WorkTime: 'text'}" sortable="'WorkTime'">
                         {{row.WorkTime}}
                     </td>
-                    <td title="'Estado'" filter="{ State: 'text'}" sortable="'State'">
-                        {{row.State}}
+                    <td title="'Novedad'" filter="{ State: 'text'}" sortable="'State'">
+                        {{row.State ? row.State : 'Sin Novedad'}}
                     </td>
                     <td title="'Tienda'" filter="{ Store: 'text'}" sortable="'Store'">
                         {{row.Store}}
