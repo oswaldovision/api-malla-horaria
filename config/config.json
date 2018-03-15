@@ -34,7 +34,7 @@
     "LDAP_url": "LDAP://KELLER.visionsoftware.loc/Default",
     "LDAP_baseDN": "dc=visionsoftware,dc=loc",
     "LDAP_username": "oswaldom@visionsoftware.com.co",
-    "LDAP_password": "Garantia4040!",
+    "LDAP_password": "Garantia5050!",
     "DB_ADMIN_USER": "admin-srv",
     "DB_ADMIN_PASSWORD": "Vision2018",
     "DB_ADMIN_SERVER": "emp-scheduler.database.windows.net",
