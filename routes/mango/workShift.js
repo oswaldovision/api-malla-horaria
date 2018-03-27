@@ -3,6 +3,9 @@ const router = express.Router()
 const {checkCors} = require('../../middleware/whiteList')
 const {selectAll, execSp, execScript} = require('../../DA/mango/mangoDA')
 
+//TODO: delete reference to table temp - mock data
+const {execSp : exSp } = require('../../DA/security/adminDA')
+
 router.get('/', checkCors , (req, res, next) => {
 
   selectAll('[dbo].[View_MNGResults]', (err, data) => {
@@ -61,6 +64,21 @@ router.get('/sellersProjection/:month',(req,res) =>{
   let script = `SELECT SellerName,DateShift, Store, WorkTime, State  FROM [dbo].[View_MNGResults] WHERE MONTH(DateShift) = ${month}  ORDER BY Store, DateShift,SellerName`
 
   execScript(script, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+    res.send(data)
+  })
+})
+
+router.get('/detailhour/:month',(req,res) => {
+  var params = [{
+    paramName: 'Month',
+    type: 'Int',
+    value: req.params.month || (new Date().getMonth()+1)
+  }]
+
+  exSp('[dbo].[spGetDetailHourStaff]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)
     }

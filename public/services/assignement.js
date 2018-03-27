@@ -26,6 +26,18 @@ function service ($http, cons) {
       return err
     })
   }
+
+  this.getDetailHour = function (month,start, end) {
+    var req = {
+      method: 'GET',
+      url: '/WorkShift/detailhour/' + month
+    }
+    return $http(req).then(function (data) {
+      return data.data
+    }).catch(function (err) {
+      return err
+    })
+  }
 }
 
 service.$inject = ['$http','cons'];
