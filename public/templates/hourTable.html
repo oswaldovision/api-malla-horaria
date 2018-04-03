@@ -37,71 +37,72 @@
 
 
     <div class="row">
-        <table ng-table="tableParams" class="table table-condensed table-hover">
-            <colgroup>
-                <col width="20%"/>
-            </colgroup>
-            <tr class="ng-table-group" ng-repeat-start="group in $groups">
-                <td colspan="50">
-                    <a href="" ng-click="group.$hideRows = !group.$hideRows">
-                        <span class="glyphicon"
-                              ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
-                        <strong>{{ group.data[0]["FriendlyDay"]}}</strong>
-                    </a>
-                </td>
-            </tr>
-            <tr ng-hide="group.$hideRows" ng-repeat="row in group.data" ng-repeat-end>
-                <td title="'Día mes'">
-
-                </td>
-                <td title="'8'">
-                    <div ng-repeat=" item in row['8'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'9'">
-                    <div ng-repeat=" item in row['9'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'10'">
-                    <div ng-repeat=" item in row['10'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'11'">
-                    <div ng-repeat=" item in row['11'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'12'">
-                    <div ng-repeat=" item in row['12'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'13'">
-                    <div ng-repeat=" item in row['13'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'14'">
-                    <div ng-repeat=" item in row['14'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'15'">
-                    <div ng-repeat=" item in row['15'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'16'">
-                    <div ng-repeat=" item in row['16'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'17'">
-                    <div ng-repeat=" item in row['17'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'18'">
-                    <div ng-repeat=" item in row['18'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'19'">
-                    <div ng-repeat=" item in row['19'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'20'">
-                    <div ng-repeat=" item in row['20'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'21'">
-                    <div ng-repeat=" item in row['21'].split(' ')">{{item}}</div>
-                </td>
-                <td title="'22'">
-                    <div ng-repeat=" item in row['22'].split(' ')">{{item}}</div>
-                </td>
-            </tr>
-        </table>
-    </div>
+        <div >
+            <table ng-table="tableParams" class="table table-condensed table-bordered table-striped">
+                <colgroup>
+                    <col width="20%"/>
+                </colgroup>
+                <tr class="ng-table-group" ng-repeat-start="group in $groups">
+                    <td colspan="50">
+                        <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                            <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                            <strong>{{ group.data[0]["FriendlyDay"]}}</strong>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide="group.$hideRows" ng-repeat="row in group.data" ng-repeat-end>
+                    <td title="'Tienda'">
+                        <div><b>{{row.Store}}</b></div>
+                    </td>
+                    <td title="'8'">
+                        <div ng-repeat=" item in row['8'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'9'">
+                        <div ng-repeat=" item in row['9'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'10'">
+                        <div ng-repeat=" item in row['10'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'11'">
+                        <div ng-repeat=" item in row['11'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'12'">
+                        <div ng-repeat=" item in row['12'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'13'">
+                        <div ng-repeat=" item in row['13'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'14'">
+                        <div ng-repeat=" item in row['14'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'15'">
+                        <div ng-repeat=" item in row['15'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'16'">
+                        <div ng-repeat=" item in row['16'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'17'">
+                        <div ng-repeat=" item in row['17'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'18'">
+                        <div ng-repeat=" item in row['18'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'19'">
+                        <div ng-repeat=" item in row['19'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'20'">
+                        <div ng-repeat=" item in row['20'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'21'">
+                        <div ng-repeat=" item in row['21'].split(' ')">{{item}}</div>
+                    </td>
+                    <td title="'22'">
+                        <div ng-repeat=" item in row['22'].split(' ')">{{item}}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+   </div>
 </div>
 <!--</div>-->
 <!--<div ng-switch-when="false">-->

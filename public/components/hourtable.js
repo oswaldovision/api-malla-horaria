@@ -27,9 +27,10 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
       // }
 
       $scope.tableParams = new NgTableParams({
-        group: { "nDay" : "asc" , title : "FriendlyDay"}
-
+        group: "nDay",//{ "nDay" : "asc" },
+        count : 7
       }, {
+        counts: [7,14,21,31],
         dataset: $scope.asignements,
         groupOptions: {
           isExpanded: false,
