@@ -68,6 +68,7 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
 
   $scope.loadAsignements = function () {
     var d = new Date();
+    $scope.currentMonth = getTextMonth(d.getMonth() + 1);
     AsignementService.getDetailHour(d.getMonth() + 1).then(function (allAsignements) {
       $scope.asignements = allAsignements.recordset
       settingTable($scope.asignements);
@@ -80,7 +81,8 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
 
   $scope.switchMonth =  function(month){
     AsignementService.getDetailHour(month).then(function (allAsignements) {
-      $scope.asignements = allAsignements.recordset
+      $scope.asignements = allAsignements.recordset;
+      $scope.currentMonth = getTextMonth(month);
       settingTable($scope.asignements);
     })
   }
@@ -97,15 +99,21 @@ var controller = function ($scope, NgTableParams, AsignementService, Session, st
 
   var settingTable =function (setData) {
     $scope.tableParams = new NgTableParams({
-      group: "nDay",
-      count : 7
+      group: "Day_Week",
+      count : 10
     }, {
-      counts: [7,14,21,31],
+      counts: [],
       dataset: setData,
       groupOptions: {
         isExpanded: false
       }
     });
+  }
+
+  var getTextMonth = function (numMonth) {
+    return $scope.months.filter(function (e) {
+      return e.id == numMonth;
+    })[0].text;
   }
 
   var getStoresInProfile = function (stores) {

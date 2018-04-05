@@ -2,7 +2,7 @@
     <div ng-switch-when="true">
         <h1>Staff</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <h4>Mes:</h4>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
@@ -16,8 +16,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6">
-                <h4>Tiendas:</h4>
+            <div class="col-md-4">
+                <h4>Tienda:</h4>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -32,6 +32,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="col-md-4">
+                <h1>{{currentMonth}}</h1>
+            </div>
         </div>
         <hr>
         <div class="row">
@@ -45,7 +48,7 @@
                             <a href="" ng-click="group.$hideRows = !group.$hideRows">
                             <span class="glyphicon"
                                   ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
-                                <strong>{{ group.data[0]["FriendlyDay"]}}</strong>
+                                <strong>{{ group.data[0]["Event_Day"]}}</strong>
                             </a>
                         </td>
                     </tr>

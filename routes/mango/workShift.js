@@ -78,7 +78,7 @@ router.get('/detailhour/:month',(req,res) => {
     value: req.params.month || (new Date().getMonth()+1)
   }]
 
-  exSp('[dbo].[spGetDetailHourStaff]', params, (err, data) => {
+  exSp('[dbo].[spGetweekStaff]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
