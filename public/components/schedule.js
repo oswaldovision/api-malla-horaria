@@ -84,7 +84,6 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
   }
 
   $scope.timespanClicked = function (date, cell) {
-    console.log($scope.cellIsOpen)
     if ($scope.calendarView === 'month') {
       if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
         $scope.cellIsOpen = false;

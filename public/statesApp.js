@@ -48,6 +48,12 @@ app.config(function ($stateProvider) {
     component : 'hourtable'
   }
 
+  var scheduleStaff = {
+    name: 'scheduleStaff',
+    url: '/scheduleStaff',
+    component : 'scheduleStaff'
+  }
+
   var unauthorizedState = {
     name: 'unauthorized',
     url: '/unauthorized',
@@ -63,6 +69,7 @@ app.config(function ($stateProvider) {
   $stateProvider.state(userState);
   $stateProvider.state(storeState);
   $stateProvider.state(hourTableState);
+  $stateProvider.state(scheduleStaff);
   $stateProvider.state("default", {
     name: 'schedule',
     url: '/schedule',

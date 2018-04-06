@@ -29,7 +29,13 @@
         <li class="active" ng-if="hasRole('Admin_App')">
             <a ui-sref="hourtable" ui-sref-active="active">
                 <i class="glyphicon glyphicon-time"></i>
-                Staff
+                Semana
+            </a>
+        </li>
+        <li class="active" ng-if="hasRole('Admin_App')">
+            <a ui-sref="scheduleStaff" ui-sref-active="active">
+                <i class="glyphicon glyphicon-calendar"></i>
+                Detalle día
             </a>
         </li>
         <li class="active" ng-if="hasRole('Admin_App')">

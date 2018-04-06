@@ -38,6 +38,18 @@ function service ($http, cons) {
       return err
     })
   }
+
+  this.detailday = function (stringDay,month) {
+    var req = {
+      method: 'GET',
+      url: '/WorkShift/detailday/' + stringDay + '/' + month
+    }
+    return $http(req).then(function (data) {
+      return data.data
+    }).catch(function (err) {
+      return err
+    })
+  }
 }
 
 service.$inject = ['$http','cons'];

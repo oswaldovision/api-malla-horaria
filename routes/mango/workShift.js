@@ -4,9 +4,9 @@ const {checkCors} = require('../../middleware/whiteList')
 const {selectAll, execSp, execScript} = require('../../DA/mango/mangoDA')
 
 //TODO: delete reference to table temp - mock data
-const {execSp : exSp } = require('../../DA/security/adminDA')
+const {execSp: exSp} = require('../../DA/security/adminDA')
 
-router.get('/', checkCors , (req, res, next) => {
+router.get('/', checkCors, (req, res, next) => {
 
   selectAll('[dbo].[View_MNGResults]', (err, data) => {
     if (err) {
@@ -48,7 +48,7 @@ router.get('/range', (req, res) => {
 
 })
 
-router.get('/sellers',(req,res) => {
+router.get('/sellers', (req, res) => {
   let script = `SELECT distinct SellerName FROM [dbo].[View_MNGResults]`
 
   execScript(script, (err, data) => {
@@ -59,8 +59,8 @@ router.get('/sellers',(req,res) => {
   })
 })
 
-router.get('/sellersProjection/:month',(req,res) =>{
-  let month = req.params.month || (new Date().getMonth()+1);
+router.get('/sellersProjection/:month', (req, res) => {
+  let month = req.params.month || (new Date().getMonth() + 1)
   let script = `SELECT SellerName,DateShift, Store, WorkTime, State  FROM [dbo].[View_MNGResults] WHERE MONTH(DateShift) = ${month}  ORDER BY Store, DateShift,SellerName`
 
   execScript(script, (err, data) => {
@@ -71,14 +71,36 @@ router.get('/sellersProjection/:month',(req,res) =>{
   })
 })
 
-router.get('/detailhour/:month',(req,res) => {
+router.get('/detailhour/:month', (req, res) => {
   var params = [{
     paramName: 'Month',
     type: 'Int',
-    value: req.params.month || (new Date().getMonth()+1)
+    value: req.params.month || (new Date().getMonth() + 1)
   }]
 
   exSp('[dbo].[spGetweekStaff]', params, (err, data) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+    res.send(data)
+  })
+})
+
+router.get('/detailday/:day/:month', (req, res) => {
+  let d = new Date()
+  let day = `${("0" + (d.getDate())).slice(-2)}-${("0" + (d.getMonth() + 1)).slice(-2)}-${d.getFullYear()}`
+  let params = [{
+    paramName: 'Day',
+    type: 'String',
+    value: req.params.day || day
+  },
+    {
+      paramName: 'Month',
+      type: 'Int',
+      value: req.params.month || (d.getMonth() + 1)
+    }]
+
+  exSp('[dbo].[spGetDetailHour]', params, (err, data) => {
     if (err) {
       res.status(500).send(err)
     }
