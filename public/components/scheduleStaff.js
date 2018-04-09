@@ -23,6 +23,12 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
     moment.locale('es'); // change the locale to french
   });
 
+  self.$onInit = function () {
+    var d = new Date();
+    var stringDate = ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + d.getFullYear();
+    loadAsignement(stringDate,("0" + (d.getMonth() + 1)).slice(-2));
+  }
+
   $scope.$watch(function () {
     return Session.user;
   },function () {
@@ -32,7 +38,6 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
 
   $scope.eventClicked = function (event) {
     Session.clickedSeller = event.title.split('(')[0].trim();
-    console.log(event.title);
   }
 
   $scope.viewChangeClicked = function(date) {
@@ -50,7 +55,12 @@ var controller = function ($scope,$location, sellersService, moment, calendarCon
     AsignementService.detailday(stringDay,month).then(function (data) {
       $scope.dataDay = data.recordset;
       $scope.titleDay = $scope.dataDay[0]["FriendlyDay"];
-      $scope.tableParams = new NgTableParams({}, {dataset: $scope.dataDay});
+      $scope.tableParams = new NgTableParams({
+        count : 8
+      }, {
+        counts: [],
+        dataset: $scope.dataDay
+      });
     })
   }
 }
